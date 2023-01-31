@@ -15,6 +15,45 @@ class CGALpolygon {
       : polygon(*(xptr_.get())), 
         xptr(Rcpp::XPtr<Polygon>(&polygon, false)) {}
 
+
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List approxConvexParts() {
+    
+    if(!polygon.is_simple()) {
+      Rcpp::stop("The polygon is not simple.");
+    }
+    if(!polygon.is_counterclockwise_oriented()) {
+      Rcpp::stop("The polygon is not counter-clockwise oriented.");
+    }
+    
+    std::list<Polygon> convexParts;
+    
+    CGAL::approx_convex_partition_2(
+      polygon.vertices_begin(), polygon.vertices_end(),
+      std::back_inserter(convexParts)
+    );
+    
+    int nparts = convexParts.size();
+    
+    std::string msg;
+    if(nparts == 1) {
+      msg = "Only one convex part found.";
+    } else {
+      msg = "Found " + std::to_string(nparts) + " convex parts.";
+    }
+    Message(msg);
+    
+    Rcpp::List Out(nparts);
+    int i = 0;
+    for(Polygon cpolygon : convexParts) {
+      Out(i++) = getVertices(cpolygon);
+    }
+    
+    return Out;
+  }
+
+
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
   double area() {
@@ -80,19 +119,7 @@ class CGALpolygon {
   // ------------------------------------------------------------------------ //
   Rcpp::NumericMatrix reverseOrientation() {
     polygon.reverse_orientation();
-    const int nverts = polygon.size();
-    Rcpp::NumericMatrix Pts(2, nverts);
-    int i = 0;
-    for(
-      VertexIterator vi = polygon.vertices_begin(); 
-      vi != polygon.vertices_end(); ++vi
-    ) {
-      Point vert = *vi;
-      Rcpp::NumericVector pt = 
-        {CGAL::to_double<EK::FT>(vert.x()), CGAL::to_double<EK::FT>(vert.y())};
-      Pts(Rcpp::_, i++) = pt;
-    }
-    return Rcpp::transpose(Pts);
+    return getVertices(polygon);
   }
   
   

@@ -10,6 +10,7 @@ RCPP_MODULE(class_CGALpolygon) {
       .constructor<const NumericMatrix>()
       .constructor<XPtr<Polygon>, const bool>()
       .field("xptr", &CGALpolygon::xptr)
+      .method("approxConvexParts", &CGALpolygon::approxConvexParts)
       .method("area", &CGALpolygon::area)
       .method("boundingBox", &CGALpolygon::boundingBox)
       .method("isCWO", &CGALpolygon::isCWO)

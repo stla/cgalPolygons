@@ -14,5 +14,6 @@
 
 typedef Polygon::Vertex_iterator VertexIterator;
 
-
-Polygon makePolygon(const Rcpp::NumericMatrix);
+void Message(const std::string&);
+Polygon makePolygon(const Rcpp::NumericMatrix&);
+Rcpp::NumericMatrix getVertices(const Polygon&);
