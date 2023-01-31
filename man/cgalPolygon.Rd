@@ -94,7 +94,7 @@ ptg$isSimple()
 
 library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
-plot(ptg, lwd = 3, col = "red")
+ptg$plot(lwd = 3, col = "red")
 
 ## ------------------------------------------------
 ## Method `cgalPolygon$reverseOrientation`
@@ -413,7 +413,7 @@ No returned value, called for side-effect.
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
-plot(ptg, lwd = 3, col = "red")
+ptg$plot(lwd = 3, col = "red")
 }
 \if{html}{\out{</div>}}
 

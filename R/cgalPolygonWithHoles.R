@@ -11,7 +11,9 @@ cgalPolygonWithHoles <- R6Class(
   cloneable = FALSE,
   
   private = list(
-    ".CGALpolygonWithHoles" = NULL
+    ".CGALpolygonWithHoles" = NULL,
+    ".vs_outer"             = NULL,
+    ".vs_holes"             = NULL
   ),
   
   public = list(
@@ -43,9 +45,10 @@ cgalPolygonWithHoles <- R6Class(
         storage.mode(hole) <- "double"
         stopifnot(noMissingValue(hole))
       }
-      holes <- lapply(holes, t)
+      private[[".vs_outer"]] <- outerVertices
+      private[[".vs_holes"]] <- holes
       private[[".CGALpolygonWithHoles"]] <- 
-        CGALpolygonWithHoles$new(t(outerVertices), holes)
+        CGALpolygonWithHoles$new(t(outerVertices), lapply(holes, t))
       invisible(self)
     },
     
@@ -58,8 +61,7 @@ cgalPolygonWithHoles <- R6Class(
     #' pwh <- cgalPolygonWithHoles$new(
     #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
     #' )
-    #' plot(pwh$boundingBox(), asp = 1)
-    #' # XXX
+    #' pwh$boundingBox()
     "boundingBox" = function() {
       private[[".CGALpolygonWithHoles"]]$boundingBox()
     },
@@ -77,6 +79,12 @@ cgalPolygonWithHoles <- R6Class(
     #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
     #' )
     #' cxparts <- pwh$convexParts()
+    #' pwh$plot(list(), density = 10)
+    #' invisible(
+    #'   lapply(cxparts, function(cxpart) {
+    #'     polygon(cxpart, lwd = 2)
+    #'   })
+    #' )
     "convexParts" = function(method = "triangle") {
       method <- match.arg(method, c("triangle", "vertical"))
       if(method == "triangle") {
@@ -84,6 +92,36 @@ cgalPolygonWithHoles <- R6Class(
       } else {
         private[[".CGALpolygonWithHoles"]]$convexPartsV()
       }
+    },
+    
+    
+    #' @description Plot the polygon with holes.
+    #' @param outerpars named list of arguments passed to 
+    #'   \code{\link[graphics]{polygon}} for the outer polygon
+    #' @param ... arguments passed to \code{\link[graphics]{polygon}} for the 
+    #'   holes
+    #' @return No returned value, called for side-effect.
+    #' @importFrom graphics plot polygon
+    #' @examples 
+    #' library(cgalPolygons)
+    #' pwh <- cgalPolygonWithHoles$new(
+    #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+    #' )
+    #' pwh$plot(
+    #'   outerpars = list(lwd = 2), density = 10
+    #' )
+    "plot" = function(outerpars, ...) {
+      bbox <- private[[".CGALpolygonWithHoles"]]$boundingBox()
+      plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
+      do.call(function(...) {
+        polygon(private[[".vs_outer"]], ...)
+      }, outerpars)
+      invisible(
+        lapply(private[[".vs_holes"]], function(hole) {
+          polygon(hole, ...) 
+        })
+      )
+      invisible(NULL)
     },
     
     

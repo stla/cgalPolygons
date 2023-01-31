@@ -58,8 +58,14 @@ public:
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
   void print() {
-    Rcpp::Rcout << "Polygon with " 
-                << polygonwh.number_of_holes() << " holes.\n";
+    int nholes = polygonwh.number_of_holes();
+    if(nholes == 0) {
+      Rcpp::Rcout << "Polygon with zero hole.\n";
+    } else if(nholes == 1) {
+      Rcpp::Rcout << "Polygon with one hole.\n";
+    } else {
+      Rcpp::Rcout << "Polygon with " << nholes << " holes.\n";
+    }
   }
   
 };

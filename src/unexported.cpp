@@ -26,25 +26,6 @@ Polygon makePolygon(const Rcpp::NumericMatrix& pts) {
 
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
-// Rcpp::NumericMatrix getVertices(const Polygon& polygon) {
-//   const int nverts = polygon.size();
-//   Rcpp::NumericMatrix Pts(2, nverts);
-//   int i = 0;
-//   for(
-//     VertexIterator vi = polygon.vertices_begin(); 
-//     vi != polygon.vertices_end(); ++vi
-//   ) {
-//     Point vert = *vi;
-//     Rcpp::NumericVector pt = 
-//       {CGAL::to_double<EK::FT>(vert.x()), CGAL::to_double<EK::FT>(vert.y())};
-//     Pts(Rcpp::_, i++) = pt;
-//   }
-//   return Rcpp::transpose(Pts);
-// }
-
-
-// -------------------------------------------------------------------------- //
-// -------------------------------------------------------------------------- //
 Polygon2WithHoles makePolygonWithHoles(
   const Rcpp::NumericMatrix& outerPts, const Rcpp::List& HolesPts
 ) {

@@ -19,6 +19,16 @@ pwh <- cgalPolygonWithHoles$new(
 pwh
 
 ## ------------------------------------------------
+## Method `cgalPolygonWithHoles$boundingBox`
+## ------------------------------------------------
+
+library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+pwh$boundingBox()
+
+## ------------------------------------------------
 ## Method `cgalPolygonWithHoles$convexParts`
 ## ------------------------------------------------
 
@@ -27,12 +37,32 @@ pwh <- cgalPolygonWithHoles$new(
   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
 )
 cxparts <- pwh$convexParts()
+pwh$plot(list(), density = 10)
+invisible(
+  lapply(cxparts, function(cxpart) {
+    polygon(cxpart, lwd = 2)
+  })
+)
+
+## ------------------------------------------------
+## Method `cgalPolygonWithHoles$plot`
+## ------------------------------------------------
+
+library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+pwh$plot(
+  outerpars = list(lwd = 2), density = 10
+)
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-cgalPolygonWithHoles-new}{\code{cgalPolygonWithHoles$new()}}
+\item \href{#method-cgalPolygonWithHoles-boundingBox}{\code{cgalPolygonWithHoles$boundingBox()}}
 \item \href{#method-cgalPolygonWithHoles-convexParts}{\code{cgalPolygonWithHoles$convexParts()}}
+\item \href{#method-cgalPolygonWithHoles-plot}{\code{cgalPolygonWithHoles$plot()}}
 \item \href{#method-cgalPolygonWithHoles-print}{\code{cgalPolygonWithHoles$print()}}
 }
 }
@@ -73,6 +103,32 @@ pwh
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-boundingBox"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-boundingBox}{}}}
+\subsection{Method \code{boundingBox()}}{
+Bounding box of the polygon with holes.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$boundingBox()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A 2x2 matrix giving the lower corner of the bounding box in its 
+  first row and the upper corner in its second row.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+pwh$boundingBox()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-cgalPolygonWithHoles-convexParts"></a>}}
 \if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-convexParts}{}}}
 \subsection{Method \code{convexParts()}}{
@@ -101,6 +157,50 @@ pwh <- cgalPolygonWithHoles$new(
   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
 )
 cxparts <- pwh$convexParts()
+pwh$plot(list(), density = 10)
+invisible(
+  lapply(cxparts, function(cxpart) {
+    polygon(cxpart, lwd = 2)
+  })
+)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-plot}{}}}
+\subsection{Method \code{plot()}}{
+Plot the polygon with holes.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$plot(outerpars, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{outerpars}}{named list of arguments passed to 
+\code{\link[graphics]{polygon}} for the outer polygon}
+
+\item{\code{...}}{arguments passed to \code{\link[graphics]{polygon}} for the 
+holes}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+No returned value, called for side-effect.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+pwh$plot(
+  outerpars = list(lwd = 2), density = 10
+)
 }
 \if{html}{\out{</div>}}
 

@@ -170,7 +170,7 @@ cgalPolygon <- R6Class(
     #' @examples 
     #' library(cgalPolygons)
     #' ptg <- cgalPolygon$new(pentagram)
-    #' plot(ptg, lwd = 3, col = "red")
+    #' ptg$plot(lwd = 3, col = "red")
     "plot" = function(...) {
       bbox <- private[[".CGALpolygon"]]$boundingBox()
       plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
