@@ -26,21 +26,21 @@ Polygon makePolygon(const Rcpp::NumericMatrix& pts) {
 
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
-Rcpp::NumericMatrix getVertices(const Polygon& polygon) {
-  const int nverts = polygon.size();
-  Rcpp::NumericMatrix Pts(2, nverts);
-  int i = 0;
-  for(
-    VertexIterator vi = polygon.vertices_begin(); 
-    vi != polygon.vertices_end(); ++vi
-  ) {
-    Point vert = *vi;
-    Rcpp::NumericVector pt = 
-      {CGAL::to_double<EK::FT>(vert.x()), CGAL::to_double<EK::FT>(vert.y())};
-    Pts(Rcpp::_, i++) = pt;
-  }
-  return Rcpp::transpose(Pts);
-}
+// Rcpp::NumericMatrix getVertices(const Polygon& polygon) {
+//   const int nverts = polygon.size();
+//   Rcpp::NumericMatrix Pts(2, nverts);
+//   int i = 0;
+//   for(
+//     VertexIterator vi = polygon.vertices_begin(); 
+//     vi != polygon.vertices_end(); ++vi
+//   ) {
+//     Point vert = *vi;
+//     Rcpp::NumericVector pt = 
+//       {CGAL::to_double<EK::FT>(vert.x()), CGAL::to_double<EK::FT>(vert.y())};
+//     Pts(Rcpp::_, i++) = pt;
+//   }
+//   return Rcpp::transpose(Pts);
+// }
 
 
 // -------------------------------------------------------------------------- //
@@ -88,13 +88,13 @@ Polygon2WithHoles makePolygonWithHoles(
 
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
-// TODO: template
-Rcpp::NumericMatrix getVertices2(const Polygon2& polygon) {
+template <typename PolygonT>
+Rcpp::NumericMatrix getVertices(const PolygonT& polygon) {
   const int nverts = polygon.size();
   Rcpp::NumericMatrix Pts(2, nverts);
   int i = 0;
   for(
-    VertexIterator2 vi = polygon.vertices_begin(); 
+    typename PolygonT::Vertex_iterator vi = polygon.vertices_begin(); 
     vi != polygon.vertices_end(); ++vi
   ) {
     Point vert = *vi;
@@ -104,3 +104,6 @@ Rcpp::NumericMatrix getVertices2(const Polygon2& polygon) {
   }
   return Rcpp::transpose(Pts);
 }
+
+template Rcpp::NumericMatrix getVertices<Polygon>(const Polygon&);
+template Rcpp::NumericMatrix getVertices<Polygon2>(const Polygon2&);

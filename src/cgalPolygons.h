@@ -17,8 +17,9 @@ typedef CGAL::Polygon_triangulation_decomposition_2<EK> PTD;
 // -------------------------------------------------------------------------- //
 void Message(const std::string&);
 Polygon makePolygon(const Rcpp::NumericMatrix&);
-Rcpp::NumericMatrix getVertices(const Polygon&);
+//Rcpp::NumericMatrix getVertices(const Polygon&);
 Polygon2WithHoles makePolygonWithHoles(
   const Rcpp::NumericMatrix&, const Rcpp::List&
 );
-Rcpp::NumericMatrix getVertices2(const Polygon2&);
+template <typename PolygonT>
+Rcpp::NumericMatrix getVertices(const PolygonT&);

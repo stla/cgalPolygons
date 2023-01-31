@@ -8,6 +8,7 @@ RCPP_MODULE(class_CGALpolygonWithHoles) {
   using namespace Rcpp;
   class_<CGALpolygonWithHoles>("CGALpolygonWithHoles")
     .constructor<const NumericMatrix, const List>()
+    .method("boundingBox", &CGALpolygonWithHoles::boundingBox)
     .method("convexPartsT", &CGALpolygonWithHoles::convexPartsT)
     .method("print", &CGALpolygonWithHoles::print);
 }

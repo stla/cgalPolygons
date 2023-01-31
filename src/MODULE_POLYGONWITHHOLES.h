@@ -10,6 +10,21 @@ public:
     const Rcpp::NumericMatrix outer, const Rcpp::List holes
   )
     : polygonwh(makePolygonWithHoles(outer, holes)) {}
+
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::NumericMatrix boundingBox() {
+    CGAL::Bbox_2 bbox = polygonwh.bbox();
+    Rcpp::NumericVector minCorner = {bbox.xmin(), bbox.ymin()};
+    Rcpp::NumericVector maxCorner = {bbox.xmax(), bbox.ymax()};
+    Rcpp::NumericMatrix Corners(2, 2);
+    Corners(0, Rcpp::_) = minCorner;
+    Corners(1, Rcpp::_) = maxCorner;
+    Rcpp::CharacterVector rownames = {"min", "max"};
+    Rcpp::rownames(Corners) = rownames;
+    return Corners;
+  }
   
   
   // ------------------------------------------------------------------------ //
@@ -33,7 +48,7 @@ public:
     Rcpp::List Out(nparts);
     int i = 0;
     for(Polygon2 cpolygon : convexParts) {
-      Out(i++) = getVertices2(cpolygon);
+      Out(i++) = getVertices<Polygon2>(cpolygon);
     }
     
     return Out;

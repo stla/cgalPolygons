@@ -47,7 +47,7 @@ class CGALpolygon {
     Rcpp::List Out(nparts);
     int i = 0;
     for(Polygon cpolygon : convexParts) {
-      Out(i++) = getVertices(cpolygon);
+      Out(i++) = getVertices<Polygon>(cpolygon);
     }
     
     return Out;
@@ -111,7 +111,7 @@ class CGALpolygon {
     Rcpp::List Out(nparts);
     int i = 0;
     for(Polygon cpolygon : convexParts) {
-      Out(i++) = getVertices(cpolygon);
+      Out(i++) = getVertices<Polygon>(cpolygon);
     }
     
     return Out;
@@ -177,7 +177,7 @@ class CGALpolygon {
     Rcpp::List Out(nparts);
     int i = 0;
     for(Polygon cpolygon : convexParts) {
-      Out(i++) = getVertices(cpolygon);
+      Out(i++) = getVertices<Polygon>(cpolygon);
     }
     
     return Out;
@@ -195,7 +195,7 @@ class CGALpolygon {
   // ------------------------------------------------------------------------ //
   Rcpp::NumericMatrix reverseOrientation() {
     polygon.reverse_orientation();
-    return getVertices(polygon);
+    return getVertices<Polygon>(polygon);
   }
   
   

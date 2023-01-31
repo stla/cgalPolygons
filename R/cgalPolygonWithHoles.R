@@ -50,6 +50,21 @@ cgalPolygonWithHoles <- R6Class(
     },
     
     
+    #' @description Bounding box of the polygon with holes.
+    #' @return A 2x2 matrix giving the lower corner of the bounding box in its 
+    #'   first row and the upper corner in its second row.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' pwh <- cgalPolygonWithHoles$new(
+    #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+    #' )
+    #' plot(pwh$boundingBox(), asp = 1)
+    #' # XXX
+    "boundingBox" = function() {
+      private[[".CGALpolygonWithHoles"]]$boundingBox()
+    },
+    
+    
     #' @description Decomposition into convex parts. The polygon must be simple 
     #'   and counter-clockwise oriented.
     #' @param method the method used: \code{"approx"}, \code{"greene"}, 
