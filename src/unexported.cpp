@@ -42,3 +42,44 @@ Rcpp::NumericMatrix getVertices(const Polygon& polygon) {
   return Rcpp::transpose(Pts);
 }
 
+
+// -------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+Polygon2WithHoles makePolygonWithHoles(
+  const Rcpp::NumericMatrix& outerPts, const Rcpp::List& HolesPts
+) {
+  
+  Polygon2 outer;
+  {
+    int npts = outerPts.ncol();
+    for(int i = 0; i < npts; i++) {
+      Rcpp::NumericVector pt = outerPts(Rcpp::_, i);
+      outer.push_back(Point2(pt(0), pt(1)));
+    }
+  }
+  
+  int nholes = HolesPts.size();
+  std::vector<Polygon2> holes(nholes);
+  for(int h = 0; h < nholes; h++) {
+    Rcpp::NumericMatrix holesPts = Rcpp::as<Rcpp::NumericMatrix>(HolesPts(h));
+    int npts = holesPts.ncol();
+    for(int i = 0; i < npts; i++) {
+      Rcpp::NumericVector pt = holesPts(Rcpp::_, i);
+      holes[h].push_back(Point2(pt(0), pt(1)));
+    }
+  }
+  
+  Polygon2WithHoles plgwh(outer, holes.begin(), holes.end());
+  return plgwh;
+}
+
+
+// -------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+std::list<Polygon2> test(const Polygon2WithHoles& plgwh) {
+  PTD decomp;
+  std::list<Polygon2> convexParts;
+  decomp(plgwh, std::back_inserter(convexParts));
+  return convexParts;
+}
+

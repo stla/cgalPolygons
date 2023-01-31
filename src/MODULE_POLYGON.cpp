@@ -2,7 +2,7 @@
 #include "cgalPolygons.h"
 #endif
 
-#include "MODULE.h"
+#include "MODULE_POLYGON.h"
 
 RCPP_MODULE(class_CGALpolygon) {
   using namespace Rcpp;
