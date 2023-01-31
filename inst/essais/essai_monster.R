@@ -10,7 +10,9 @@ pwh$plot(
 library(cgalPolygons)
 pwh <- cgalPolygonWithHoles$new(monster[["outer"]], monster[["holes"]])
 cxparts <- pwh$convexParts(method = "triangle")
-pwh$plot(list(), density = 18)
+
+par(mar = c(0, 0, 0, 0))
+pwh$plot(list(col = "pink"), col = "yellow")
 invisible(
   lapply(cxparts, function(cxpart) {
     polygon(cxpart, lwd = 2)
