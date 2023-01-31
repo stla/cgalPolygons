@@ -132,8 +132,7 @@ pwh$boundingBox()
 \if{html}{\out{<a id="method-cgalPolygonWithHoles-convexParts"></a>}}
 \if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-convexParts}{}}}
 \subsection{Method \code{convexParts()}}{
-Decomposition into convex parts. The polygon must be simple 
-  and counter-clockwise oriented.
+Decomposition into convex parts of the polygon with holes.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$convexParts(method = "triangle")}\if{html}{\out{</div>}}
 }
@@ -141,8 +140,7 @@ Decomposition into convex parts. The polygon must be simple
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{method}}{the method used: \code{"approx"}, \code{"greene"}, 
-or \code{"optimal"}}
+\item{\code{method}}{the method used: \code{"triangle"} or \code{"vertical"}}
 }
 \if{html}{\out{</div>}}
 }

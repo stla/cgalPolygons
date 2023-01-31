@@ -67,10 +67,8 @@ cgalPolygonWithHoles <- R6Class(
     },
     
     
-    #' @description Decomposition into convex parts. The polygon must be simple 
-    #'   and counter-clockwise oriented.
-    #' @param method the method used: \code{"approx"}, \code{"greene"}, 
-    #'   or \code{"optimal"}
+    #' @description Decomposition into convex parts of the polygon with holes.
+    #' @param method the method used: \code{"triangle"} or \code{"vertical"}
     #' @return A list of matrices; each matrix has two columns and represents 
     #'   a convex polygon.
     #' @examples 

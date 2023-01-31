@@ -13,7 +13,7 @@ library(cgalPolygons)
 pwh <- cgalPolygonWithHoles$new(
   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
 )
-cxparts <- pwh$convexParts()
+cxparts <- pwh$convexParts(method = "vertical")
 pwh$plot(list(), density = 10)
 invisible(
   lapply(cxparts, function(cxpart) {

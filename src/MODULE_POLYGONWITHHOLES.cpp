@@ -10,5 +10,6 @@ RCPP_MODULE(class_CGALpolygonWithHoles) {
     .constructor<const NumericMatrix, const List>()
     .method("boundingBox", &CGALpolygonWithHoles::boundingBox)
     .method("convexPartsT", &CGALpolygonWithHoles::convexPartsT)
+    .method("convexPartsV", &CGALpolygonWithHoles::convexPartsV)
     .method("print", &CGALpolygonWithHoles::print);
 }

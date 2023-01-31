@@ -57,6 +57,34 @@ public:
   
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
+  Rcpp::List convexPartsV() {
+    
+    PVD decomposition;
+    std::list<Polygon2> convexParts;
+    decomposition(polygonwh, std::back_inserter(convexParts));
+    
+    int nparts = convexParts.size();
+    
+    std::string msg;
+    if(nparts == 1) {
+      msg = "Only one convex part found.";
+    } else {
+      msg = "Found " + std::to_string(nparts) + " convex parts.";
+    }
+    Message(msg);
+    
+    Rcpp::List Out(nparts);
+    int i = 0;
+    for(Polygon2 cpolygon : convexParts) {
+      Out(i++) = getVertices<Polygon2>(cpolygon);
+    }
+    
+    return Out;
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
   void print() {
     int nholes = polygonwh.number_of_holes();
     if(nholes == 0) {
