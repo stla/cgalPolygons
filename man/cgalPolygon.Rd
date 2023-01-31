@@ -35,6 +35,14 @@ plot(ptg$boundingBox(), asp = 1)
 polygon(pentagram)
 
 ## ------------------------------------------------
+## Method `cgalPolygon$getVertices`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$getVertices()
+
+## ------------------------------------------------
 ## Method `cgalPolygon$isCWO`
 ## ------------------------------------------------
 
@@ -75,6 +83,16 @@ ptg <- cgalPolygon$new(pentagram)
 plot(ptg, lwd = 3, col = "red")
 
 ## ------------------------------------------------
+## Method `cgalPolygon$reverseOrientation`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isCWO()
+ptg$reverseOrientation()
+ptg$isCWO()
+
+## ------------------------------------------------
 ## Method `cgalPolygon$whereIs`
 ## ------------------------------------------------
 
@@ -91,11 +109,13 @@ ptg$whereIs(rbind(pt1, pt2))
 \item \href{#method-cgalPolygon-print}{\code{cgalPolygon$print()}}
 \item \href{#method-cgalPolygon-area}{\code{cgalPolygon$area()}}
 \item \href{#method-cgalPolygon-boundingBox}{\code{cgalPolygon$boundingBox()}}
+\item \href{#method-cgalPolygon-getVertices}{\code{cgalPolygon$getVertices()}}
 \item \href{#method-cgalPolygon-isCWO}{\code{cgalPolygon$isCWO()}}
 \item \href{#method-cgalPolygon-isCCWO}{\code{cgalPolygon$isCCWO()}}
 \item \href{#method-cgalPolygon-isConvex}{\code{cgalPolygon$isConvex()}}
 \item \href{#method-cgalPolygon-isSimple}{\code{cgalPolygon$isSimple()}}
 \item \href{#method-cgalPolygon-plot}{\code{cgalPolygon$plot()}}
+\item \href{#method-cgalPolygon-reverseOrientation}{\code{cgalPolygon$reverseOrientation()}}
 \item \href{#method-cgalPolygon-whereIs}{\code{cgalPolygon$whereIs()}}
 }
 }
@@ -193,6 +213,29 @@ A 2x2 matrix giving the lower corner of the bounding box in its
 ptg <- cgalPolygon$new(pentagram)
 plot(ptg$boundingBox(), asp = 1)
 polygon(pentagram)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-getVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-getVertices}{}}}
+\subsection{Method \code{getVertices()}}{
+Vertices of the polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$getVertices()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+The vertices in a matrix with two columns.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$getVertices()
 }
 \if{html}{\out{</div>}}
 
@@ -317,6 +360,31 @@ No returned value, called for side-effect.
 \preformatted{library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
 plot(ptg, lwd = 3, col = "red")
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-reverseOrientation"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-reverseOrientation}{}}}
+\subsection{Method \code{reverseOrientation()}}{
+Reverse the orientation of the polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$reverseOrientation()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+The \code{cgalPolygon} object, invisibly.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isCWO()
+ptg$reverseOrientation()
+ptg$isCWO()
 }
 \if{html}{\out{</div>}}
 

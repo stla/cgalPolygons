@@ -13,3 +13,9 @@ ptg <- cgalPolygon$new(pentagram)
 pt1 <- c(0, 0) # inside
 pt2 <- c(4, 0) # outside
 ptg$whereIs(rbind(pt1, pt2))
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isCWO()
+ptg$reverseOrientation()
+ptg$isCWO()

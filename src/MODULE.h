@@ -75,6 +75,26 @@ class CGALpolygon {
     Rcpp::Rcout << "Polygon with " << polygon.size() << " vertices.\n";
   }
 
+
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::NumericMatrix reverseOrientation() {
+    polygon.reverse_orientation();
+    const int nverts = polygon.size();
+    Rcpp::NumericMatrix Pts(2, nverts);
+    int i = 0;
+    for(
+      VertexIterator vi = polygon.vertices_begin(); 
+      vi != polygon.vertices_end(); ++vi
+    ) {
+      Point vert = *vi;
+      Rcpp::NumericVector pt = 
+        {CGAL::to_double<EK::FT>(vert.x()), CGAL::to_double<EK::FT>(vert.y())};
+      Pts(Rcpp::_, i++) = pt;
+    }
+    return Rcpp::transpose(Pts);
+  }
+  
   
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //

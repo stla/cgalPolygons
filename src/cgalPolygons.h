@@ -12,4 +12,7 @@
 #include <CGAL/enum.h>
 
 
+typedef Polygon::Vertex_iterator VertexIterator;
+
+
 Polygon makePolygon(const Rcpp::NumericMatrix);

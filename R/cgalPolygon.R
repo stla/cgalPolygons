@@ -75,6 +75,16 @@ cgalPolygon <- R6Class(
       private[[".CGALpolygon"]]$boundingBox()
     },
 
+    #' @description Vertices of the polygon.
+    #' @return The vertices in a matrix with two columns.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg$getVertices()
+    "getVertices" = function() {
+      private[[".vertices"]]
+    },
+    
     #' @description Checks whether the polygon is clockwise oriented.
     #' @return A Boolean value.
     #' @examples 
@@ -133,6 +143,20 @@ cgalPolygon <- R6Class(
       plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
       polygon(private[[".vertices"]], ...)
       invisible(NULL)
+    },
+
+    #' @description Reverse the orientation of the polygon.
+    #' @return The \code{cgalPolygon} object, invisibly.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg$isCCWO()
+    #' ptg$reverseOrientation()
+    #' ptg$isCCWO()
+    "reverseOrientation" = function() {
+      vertices <- private[[".CGALpolygon"]]$reverseOrientation()
+      private[[".vertices"]] <- vertices
+      invisible(self)
     },
     
     #' @description Locate point(s) with respect to the polygon. The polygon 

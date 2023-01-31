@@ -17,5 +17,6 @@ RCPP_MODULE(class_CGALpolygon) {
       .method("isConvex", &CGALpolygon::isConvex)
       .method("isSimple", &CGALpolygon::isSimple)
       .method("print", &CGALpolygon::print)
+      .method("reverseOrientation", &CGALpolygon::reverseOrientation)
       .method("whereIs", &CGALpolygon::whereIs);
 }
