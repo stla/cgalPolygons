@@ -41,6 +41,16 @@ polygon(pentagram)
 library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
 plot(ptg, lwd = 3, col = "red")
+
+## ------------------------------------------------
+## Method `cgalPolygon$whereIs`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+pt1 <- c(0, 0) # inside
+pt2 <- c(4, 0) # outside
+ptg$whereIs(rbind(pt1, pt2))
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -50,6 +60,7 @@ plot(ptg, lwd = 3, col = "red")
 \item \href{#method-cgalPolygon-area}{\code{cgalPolygon$area()}}
 \item \href{#method-cgalPolygon-boundingBox}{\code{cgalPolygon$boundingBox()}}
 \item \href{#method-cgalPolygon-plot}{\code{cgalPolygon$plot()}}
+\item \href{#method-cgalPolygon-whereIs}{\code{cgalPolygon$whereIs()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -176,6 +187,42 @@ No returned value, called for side-effect.
 \preformatted{library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
 plot(ptg, lwd = 3, col = "red")
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-whereIs"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-whereIs}{}}}
+\subsection{Method \code{whereIs()}}{
+Locate point(s) with respect to the polygon. The polygon 
+  must be simple.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$whereIs(points)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{points}}{a numeric matrix with two columns, or a numeric vector 
+of length 2 (for a single point)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+An integer vector with possible values \code{-1}, \code{1}, or 
+  \code{0}: value \code{-1} for outside, \code{1} for inside, and 
+  \code{0} if the point is on the boundary of the polygon.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+pt1 <- c(0, 0) # inside
+pt2 <- c(4, 0) # outside
+ptg$whereIs(rbind(pt1, pt2))
 }
 \if{html}{\out{</div>}}
 

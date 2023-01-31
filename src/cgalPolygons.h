@@ -9,6 +9,7 @@
 #include "cgalPolygons_types.h"
 
 #include <CGAL/Bbox_2.h>
+#include <CGAL/enum.h>
 
 
 Polygon makePolygon(const Rcpp::NumericMatrix);

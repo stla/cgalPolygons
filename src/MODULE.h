@@ -36,12 +36,41 @@ class CGALpolygon {
     Rcpp::rownames(Corners) = rownames;
     return Corners;
   }
-  
+
     
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
   void print() {
     Rcpp::Rcout << "Polygon with " << polygon.size() << " vertices.\n";
   }
+
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::IntegerVector whereIs(Rcpp::NumericMatrix points) {
+    
+    if(!polygon.is_simple()) {
+      Rcpp::stop("The polygon is not simple.");
+    }
+
+    int npoints = points.ncol();
+    Rcpp::IntegerVector results(npoints);
+    
+    for(int i = 0; i < npoints; i++) {
+      Rcpp::NumericVector point = points(Rcpp::_, i);
+      Point pt(point(0), point(1));
+      CGAL::Bounded_side side = polygon.bounded_side(pt);
+      int result = -1;
+      if(side == CGAL::ON_BOUNDED_SIDE) {
+        result = 1;
+      } else if(side == CGAL::ON_BOUNDARY) {
+        result = 0;
+      }
+      results(i) = result;
+    }
+    
+    return results;
+  }
+  
   
 };

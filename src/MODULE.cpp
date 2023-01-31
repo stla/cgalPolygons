@@ -12,5 +12,6 @@ RCPP_MODULE(class_CGALpolygon) {
       .field("xptr", &CGALpolygon::xptr)
       .method("area", &CGALpolygon::area)
       .method("boundingBox", &CGALpolygon::boundingBox)
-      .method("print", &CGALpolygon::print);
+      .method("print", &CGALpolygon::print)
+      .method("whereIs", &CGALpolygon::whereIs);
 }

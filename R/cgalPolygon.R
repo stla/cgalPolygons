@@ -37,6 +37,7 @@ cgalPolygon <- R6Class(
       }
       stopifnot(is.matrix(vertices))
       stopifnot(ncol(vertices) == 2L)
+      storage.mode(vertices) <- "double"
       stopifnot(noMissingValue(vertices))
       private[[".CGALpolygon"]] <- CGALpolygon$new(t(vertices))
       private[[".vertices"]]    <- vertices
@@ -87,6 +88,29 @@ cgalPolygon <- R6Class(
       plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
       polygon(private[[".vertices"]], ...)
       invisible(NULL)
+    },
+    
+    #' @description Locate point(s) with respect to the polygon. The polygon 
+    #'   must be simple.
+    #' @param points a numeric matrix with two columns, or a numeric vector 
+    #'   of length 2 (for a single point)
+    #' @return An integer vector with possible values \code{-1}, \code{1}, or 
+    #'   \code{0}: value \code{-1} for outside, \code{1} for inside, and 
+    #'   \code{0} if the point is on the boundary of the polygon.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' pt1 <- c(0, 0) # inside
+    #' pt2 <- c(4, 0) # outside
+    #' ptg$whereIs(rbind(pt1, pt2))
+    "whereIs" = function(points) {
+      if(!is.matrix(points)) {
+        points <- rbind(points)
+      }
+      stopifnot(ncol(points) == 2L)
+      storage.mode(points) <- "double"
+      stopifnot(noMissingValue(points))
+      private[[".CGALpolygon"]]$whereIs(t(points))
     }
     
   )
