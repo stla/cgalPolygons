@@ -14,9 +14,11 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 
 RcppExport SEXP _rcpp_module_boot_class_CGALpolygon();
+RcppExport SEXP _rcpp_module_boot_class_CGALpolygonWithHoles();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rcpp_module_boot_class_CGALpolygon", (DL_FUNC) &_rcpp_module_boot_class_CGALpolygon, 0},
+    {"_rcpp_module_boot_class_CGALpolygonWithHoles", (DL_FUNC) &_rcpp_module_boot_class_CGALpolygonWithHoles, 0},
     {NULL, NULL, 0}
 };
 

@@ -3,4 +3,5 @@
 #' @importFrom methods new
 NULL
 
-CGALpolygon <- Rcpp::setRcppClass("CGALpolygon")
+CGALpolygon          <- setRcppClass("CGALpolygon")
+CGALpolygonWithHoles <- setRcppClass("CGALpolygonWithHoles")
