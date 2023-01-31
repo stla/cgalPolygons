@@ -21,13 +21,12 @@ cgalPolygon <- R6Class(
   public = list(
     
     #' @description Creates a new \code{cgalpolygon} object.
-    #' @param vertices if \code{mesh} is missing, must be a numeric matrix with 
-    #'   three columns
+    #' @param vertices a numeric matrix with two columns
     #' @return A \code{cgalPolygon} object.
     #' @examples 
-    #' library(cgalPolygon)
-    #' mesh <- cgalMesh$new(meshFile)
-    #' rglmesh <- mesh$getMesh()
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg
     "initialize" = function(vertices) {
       # one can also initialize from an external pointer, but 
       # this is hidden to the user
@@ -35,15 +34,30 @@ cgalPolygon <- R6Class(
         private[[".CGALpolygon"]] <- CGALpolygon$new(vertices, TRUE)
         return(invisible(self))
       }
-      private[[".CGALpolygon"]] <- CGALpolygon$new(vertices)
+      stopifnot(is.matrix(vertices))
+      stopifnot(ncol(vertices) == 2L)
+      stopifnot(noMissingValue(vertices))
+      private[[".CGALpolygon"]] <- CGALpolygon$new(t(vertices))
       invisible(self)
     },
     
-    #' @description Print a \code{cgalPolygon} object.
+    #' @description Print the \code{cgalPolygon} object.
     #' @param ... ignored
     #' @return No value, just prints some information about the polygon.
     "print" = function(...) {
       private[[".CGALpolygon"]]$print()
+    },
+
+    #' @description Signed area of the polygon.
+    #' @return A number, the signed area of the polygon; it is positive if the 
+    #'   polygon is counter-clockwise oriented, negative otherwise.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg$area() # should be 5 / sqrt(130 + 58*sqrt(5))
+    #' 5 / sqrt(130 + 58*sqrt(5))
+    "area" = function() {
+      private[[".CGALpolygon"]]$area()
     }
     
   )

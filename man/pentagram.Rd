@@ -11,6 +11,7 @@ A matrix with ten rows and two columns.
 pentagram
 }
 \description{
-A matrix representing a regular pentagram.
+A matrix representing a regular pentagram. The pentagram is 
+  counter-clockwise oriented.
 }
 \keyword{datasets}

@@ -12,15 +12,25 @@ R6 class to represent a CGAL polygon.
 ## Method `cgalPolygon$new`
 ## ------------------------------------------------
 
-library(cgalPolygon)
-mesh <- cgalMesh$new(meshFile)
-rglmesh <- mesh$getMesh()
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg
+
+## ------------------------------------------------
+## Method `cgalPolygon$area`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$area() # should be 5 / sqrt(130 + 58*sqrt(5))
+5 / sqrt(130 + 58*sqrt(5))
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-cgalPolygon-new}{\code{cgalPolygon$new()}}
 \item \href{#method-cgalPolygon-print}{\code{cgalPolygon$print()}}
+\item \href{#method-cgalPolygon-area}{\code{cgalPolygon$area()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -35,8 +45,7 @@ Creates a new \code{cgalpolygon} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{vertices}}{if \code{mesh} is missing, must be a numeric matrix with 
-three columns}
+\item{\code{vertices}}{a numeric matrix with two columns}
 }
 \if{html}{\out{</div>}}
 }
@@ -45,9 +54,9 @@ A \code{cgalPolygon} object.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{library(cgalPolygon)
-mesh <- cgalMesh$new(meshFile)
-rglmesh <- mesh$getMesh()
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg
 }
 \if{html}{\out{</div>}}
 
@@ -58,7 +67,7 @@ rglmesh <- mesh$getMesh()
 \if{html}{\out{<a id="method-cgalPolygon-print"></a>}}
 \if{latex}{\out{\hypertarget{method-cgalPolygon-print}{}}}
 \subsection{Method \code{print()}}{
-Print a \code{cgalPolygon} object.
+Print the \code{cgalPolygon} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$print(...)}\if{html}{\out{</div>}}
 }
@@ -73,5 +82,30 @@ Print a \code{cgalPolygon} object.
 \subsection{Returns}{
 No value, just prints some information about the polygon.
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-area"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-area}{}}}
+\subsection{Method \code{area()}}{
+Signed area of the polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$area()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A number, the signed area of the polygon; it is positive if the 
+  polygon is counter-clockwise oriented, negative otherwise.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$area() # should be 5 / sqrt(130 + 58*sqrt(5))
+5 / sqrt(130 + 58*sqrt(5))
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 }
