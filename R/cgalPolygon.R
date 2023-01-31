@@ -51,6 +51,7 @@ cgalPolygon <- R6Class(
       private[[".CGALpolygon"]]$print()
     },
 
+    
     #' @description Signed area of the polygon.
     #' @return A number, the signed area of the polygon; it is positive if the 
     #'   polygon is counter-clockwise oriented, negative otherwise.
@@ -62,6 +63,7 @@ cgalPolygon <- R6Class(
     "area" = function() {
       private[[".CGALpolygon"]]$area()
     },
+    
     
     #' @description Bounding box of the polygon.
     #' @return A 2x2 matrix giving the lower corner of the bounding box in its 
@@ -75,6 +77,27 @@ cgalPolygon <- R6Class(
       private[[".CGALpolygon"]]$boundingBox()
     },
 
+
+    #' @description Decomposition into convex parts. The polygon must be simple 
+    #'   and counter-clockwise oriented.
+    #' @param method the method used; can be XXXX
+    #' @return A list of matrices; each matrix has two columns and represents 
+    #'   a convex polygon.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' cxparts <- ptg$convexParts()
+    #' ptg$plot(col = "yellow", lwd = 3)
+    #' invisible(
+    #'   lapply(cxparts, function(cxpart) {
+    #'     polygon(cxpart, lwd = 2)
+    #'   })
+    #' )
+    "convexParts" = function(method = "optimal") {
+      private[[".CGALpolygon"]]$approxConvexParts()
+    },
+
+        
     #' @description Vertices of the polygon.
     #' @return The vertices in a matrix with two columns.
     #' @examples 
@@ -84,6 +107,7 @@ cgalPolygon <- R6Class(
     "getVertices" = function() {
       private[[".vertices"]]
     },
+    
     
     #' @description Checks whether the polygon is clockwise oriented.
     #' @return A Boolean value.

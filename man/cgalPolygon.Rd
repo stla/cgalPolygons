@@ -35,6 +35,20 @@ plot(ptg$boundingBox(), asp = 1)
 polygon(pentagram)
 
 ## ------------------------------------------------
+## Method `cgalPolygon$convexParts`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+cxparts <- ptg$convexParts()
+ptg$plot(col = "yellow", lwd = 3)
+invisible(
+  lapply(cxparts, function(cxpart) {
+    polygon(cxpart, lwd = 2)
+  })
+)
+
+## ------------------------------------------------
 ## Method `cgalPolygon$getVertices`
 ## ------------------------------------------------
 
@@ -88,9 +102,9 @@ plot(ptg, lwd = 3, col = "red")
 
 library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
-ptg$isCWO()
+ptg$isCCWO()
 ptg$reverseOrientation()
-ptg$isCWO()
+ptg$isCCWO()
 
 ## ------------------------------------------------
 ## Method `cgalPolygon$whereIs`
@@ -109,6 +123,7 @@ ptg$whereIs(rbind(pt1, pt2))
 \item \href{#method-cgalPolygon-print}{\code{cgalPolygon$print()}}
 \item \href{#method-cgalPolygon-area}{\code{cgalPolygon$area()}}
 \item \href{#method-cgalPolygon-boundingBox}{\code{cgalPolygon$boundingBox()}}
+\item \href{#method-cgalPolygon-convexParts}{\code{cgalPolygon$convexParts()}}
 \item \href{#method-cgalPolygon-getVertices}{\code{cgalPolygon$getVertices()}}
 \item \href{#method-cgalPolygon-isCWO}{\code{cgalPolygon$isCWO()}}
 \item \href{#method-cgalPolygon-isCCWO}{\code{cgalPolygon$isCCWO()}}
@@ -213,6 +228,44 @@ A 2x2 matrix giving the lower corner of the bounding box in its
 ptg <- cgalPolygon$new(pentagram)
 plot(ptg$boundingBox(), asp = 1)
 polygon(pentagram)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-convexParts"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-convexParts}{}}}
+\subsection{Method \code{convexParts()}}{
+Decomposition into convex parts. The polygon must be simple 
+  and counter-clockwise oriented.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$convexParts(method = "optimal")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{method}}{the method used; can be XXXX}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list of matrices; each matrix has two columns and represents 
+  a convex polygon.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+cxparts <- ptg$convexParts()
+ptg$plot(col = "yellow", lwd = 3)
+invisible(
+  lapply(cxparts, function(cxpart) {
+    polygon(cxpart, lwd = 2)
+  })
+)
 }
 \if{html}{\out{</div>}}
 
@@ -382,9 +435,9 @@ The \code{cgalPolygon} object, invisibly.
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
-ptg$isCWO()
+ptg$isCCWO()
 ptg$reverseOrientation()
-ptg$isCWO()
+ptg$isCCWO()
 }
 \if{html}{\out{</div>}}
 

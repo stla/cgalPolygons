@@ -19,3 +19,14 @@ ptg <- cgalPolygon$new(pentagram)
 ptg$isCWO()
 ptg$reverseOrientation()
 ptg$isCWO()
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+cxparts <- ptg$convexParts()
+ptg$plot(col = "yellow", lwd = 3)
+invisible(
+  lapply(cxparts, function(cxpart) {
+    polygon(cxpart, lwd = 2)
+  })
+)
+
