@@ -13,10 +13,12 @@ RCPP_MODULE(class_CGALpolygon) {
       .method("approxConvexParts", &CGALpolygon::approxConvexParts)
       .method("area", &CGALpolygon::area)
       .method("boundingBox", &CGALpolygon::boundingBox)
+      .method("greeneApproxConvexParts", &CGALpolygon::greeneApproxConvexParts)
       .method("isCWO", &CGALpolygon::isCWO)
       .method("isCCWO", &CGALpolygon::isCCWO)
       .method("isConvex", &CGALpolygon::isConvex)
       .method("isSimple", &CGALpolygon::isSimple)
+      .method("optimalConvexParts", &CGALpolygon::optimalConvexParts)
       .method("print", &CGALpolygon::print)
       .method("reverseOrientation", &CGALpolygon::reverseOrientation)
       .method("whereIs", &CGALpolygon::whereIs);

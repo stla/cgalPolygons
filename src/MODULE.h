@@ -78,7 +78,45 @@ class CGALpolygon {
     Rcpp::rownames(Corners) = rownames;
     return Corners;
   }
-
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List greeneApproxConvexParts() {
+    
+    if(!polygon.is_simple()) {
+      Rcpp::stop("The polygon is not simple.");
+    }
+    if(!polygon.is_counterclockwise_oriented()) {
+      Rcpp::stop("The polygon is not counter-clockwise oriented.");
+    }
+    
+    std::list<Polygon> convexParts;
+    
+    CGAL::greene_approx_convex_partition_2(
+      polygon.vertices_begin(), polygon.vertices_end(),
+      std::back_inserter(convexParts)
+    );
+    
+    int nparts = convexParts.size();
+    
+    std::string msg;
+    if(nparts == 1) {
+      msg = "Only one convex part found.";
+    } else {
+      msg = "Found " + std::to_string(nparts) + " convex parts.";
+    }
+    Message(msg);
+    
+    Rcpp::List Out(nparts);
+    int i = 0;
+    for(Polygon cpolygon : convexParts) {
+      Out(i++) = getVertices(cpolygon);
+    }
+    
+    return Out;
+  }
+  
   
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
@@ -105,6 +143,44 @@ class CGALpolygon {
   // ------------------------------------------------------------------------ //
   bool isSimple() {
     return polygon.is_simple();
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List optimalConvexParts() {
+    
+    if(!polygon.is_simple()) {
+      Rcpp::stop("The polygon is not simple.");
+    }
+    if(!polygon.is_counterclockwise_oriented()) {
+      Rcpp::stop("The polygon is not counter-clockwise oriented.");
+    }
+    
+    std::list<Polygon> convexParts;
+    
+    CGAL::optimal_convex_partition_2(
+      polygon.vertices_begin(), polygon.vertices_end(),
+      std::back_inserter(convexParts)
+    );
+    
+    int nparts = convexParts.size();
+    
+    std::string msg;
+    if(nparts == 1) {
+      msg = "Only one convex part found.";
+    } else {
+      msg = "Found " + std::to_string(nparts) + " convex parts.";
+    }
+    Message(msg);
+    
+    Rcpp::List Out(nparts);
+    int i = 0;
+    for(Polygon cpolygon : convexParts) {
+      Out(i++) = getVertices(cpolygon);
+    }
+    
+    return Out;
   }
   
     

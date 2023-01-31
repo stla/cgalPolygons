@@ -247,7 +247,8 @@ Decomposition into convex parts. The polygon must be simple
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{method}}{the method used; can be XXXX}
+\item{\code{method}}{the method used: \code{"approx"}, \code{"greene"}, 
+or \code{"optimal"}}
 }
 \if{html}{\out{</div>}}
 }

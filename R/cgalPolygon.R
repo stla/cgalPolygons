@@ -80,7 +80,8 @@ cgalPolygon <- R6Class(
 
     #' @description Decomposition into convex parts. The polygon must be simple 
     #'   and counter-clockwise oriented.
-    #' @param method the method used; can be XXXX
+    #' @param method the method used: \code{"approx"}, \code{"greene"}, 
+    #'   or \code{"optimal"}
     #' @return A list of matrices; each matrix has two columns and represents 
     #'   a convex polygon.
     #' @examples 
@@ -94,7 +95,14 @@ cgalPolygon <- R6Class(
     #'   })
     #' )
     "convexParts" = function(method = "optimal") {
-      private[[".CGALpolygon"]]$approxConvexParts()
+      method <- match.arg(method, c("approx", "greene", "optimal"))
+      if(method == "approx") {
+        private[[".CGALpolygon"]]$approxConvexParts()
+      } else if(method == "greene") {
+        private[[".CGALpolygon"]]$greeneApproxConvexParts()
+      } else {
+        private[[".CGALpolygon"]]$optimalConvexParts()
+      }
     },
 
         

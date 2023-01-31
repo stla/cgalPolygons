@@ -22,8 +22,25 @@ ptg$isCWO()
 
 library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
-cxparts <- ptg$convexParts()
+#
+cxparts <- ptg$convexParts("approx")
 ptg$plot(col = "yellow", lwd = 3)
+invisible(
+  lapply(cxparts, function(cxpart) {
+    polygon(cxpart, lwd = 2)
+  })
+)
+#
+cxparts <- ptg$convexParts("greene")
+ptg$plot(col = "orange", lwd = 3)
+invisible(
+  lapply(cxparts, function(cxpart) {
+    polygon(cxpart, lwd = 2)
+  })
+)
+#
+cxparts <- ptg$convexParts("optimal")
+ptg$plot(col = "cyan", lwd = 3)
 invisible(
   lapply(cxparts, function(cxpart) {
     polygon(cxpart, lwd = 2)
