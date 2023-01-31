@@ -88,6 +88,7 @@ Polygon2WithHoles makePolygonWithHoles(
 
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
+// TODO: template
 Rcpp::NumericMatrix getVertices2(const Polygon2& polygon) {
   const int nverts = polygon.size();
   Rcpp::NumericMatrix Pts(2, nverts);
