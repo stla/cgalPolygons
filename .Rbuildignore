@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^inst/essais$
+^\.github$
+^cran-comments\.md$
+^data-raw$
+^inst/screenshots$
+^inst/trash$
+^CRAN-SUBMISSION$
+^inst/keep$
