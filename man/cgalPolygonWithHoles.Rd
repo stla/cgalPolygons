@@ -13,13 +13,26 @@ R6 class to represent a CGAL polygonWithHoles.
 ## ------------------------------------------------
 
 library(cgalPolygons)
-pwh <- cgalPolygonWithHoles$new(squareWithHole)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
 pwh
+
+## ------------------------------------------------
+## Method `cgalPolygonWithHoles$convexParts`
+## ------------------------------------------------
+
+library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+cxparts <- pwh$convexParts()
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-cgalPolygonWithHoles-new}{\code{cgalPolygonWithHoles$new()}}
+\item \href{#method-cgalPolygonWithHoles-convexParts}{\code{cgalPolygonWithHoles$convexParts()}}
 \item \href{#method-cgalPolygonWithHoles-print}{\code{cgalPolygonWithHoles$print()}}
 }
 }
@@ -49,8 +62,45 @@ A \code{cgalPolygonWithHoles} object.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{library(cgalPolygons)
-pwh <- cgalPolygonWithHoles$new(squareWithHole)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
 pwh
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-convexParts"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-convexParts}{}}}
+\subsection{Method \code{convexParts()}}{
+Decomposition into convex parts. The polygon must be simple 
+  and counter-clockwise oriented.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$convexParts(method = "triangle")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{method}}{the method used: \code{"approx"}, \code{"greene"}, 
+or \code{"optimal"}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list of matrices; each matrix has two columns and represents 
+  a convex polygon.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+cxparts <- pwh$convexParts()
 }
 \if{html}{\out{</div>}}
 

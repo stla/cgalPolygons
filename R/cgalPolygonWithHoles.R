@@ -24,7 +24,9 @@ cgalPolygonWithHoles <- R6Class(
     #' @return A \code{cgalPolygonWithHoles} object.
     #' @examples 
     #' library(cgalPolygons)
-    #' pwh <- cgalPolygonWithHoles$new(squareWithHole)
+    #' pwh <- cgalPolygonWithHoles$new(
+    #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+    #' )
     #' pwh
     "initialize" = function(outerVertices, holes) {
       stopifnot(is.matrix(outerVertices))
@@ -46,6 +48,29 @@ cgalPolygonWithHoles <- R6Class(
         CGALpolygonWithHoles$new(t(outerVertices), holes)
       invisible(self)
     },
+    
+    
+    #' @description Decomposition into convex parts. The polygon must be simple 
+    #'   and counter-clockwise oriented.
+    #' @param method the method used: \code{"approx"}, \code{"greene"}, 
+    #'   or \code{"optimal"}
+    #' @return A list of matrices; each matrix has two columns and represents 
+    #'   a convex polygon.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' pwh <- cgalPolygonWithHoles$new(
+    #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+    #' )
+    #' cxparts <- pwh$convexParts()
+    "convexParts" = function(method = "triangle") {
+      method <- match.arg(method, c("triangle", "vertical"))
+      if(method == "triangle") {
+        private[[".CGALpolygonWithHoles"]]$convexPartsT()
+      } else {
+        private[[".CGALpolygonWithHoles"]]$convexPartsV()
+      }
+    },
+    
     
     #' @description Print the \code{cgalPolygonWithHoles} object.
     #' @param ... ignored
