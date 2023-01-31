@@ -35,6 +35,38 @@ plot(ptg$boundingBox(), asp = 1)
 polygon(pentagram)
 
 ## ------------------------------------------------
+## Method `cgalPolygon$isCWO`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isCWO()
+
+## ------------------------------------------------
+## Method `cgalPolygon$isCCWO`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isCCWO()
+
+## ------------------------------------------------
+## Method `cgalPolygon$isConvex`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isConvex()
+
+## ------------------------------------------------
+## Method `cgalPolygon$isSimple`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isSimple()
+
+## ------------------------------------------------
 ## Method `cgalPolygon$plot`
 ## ------------------------------------------------
 
@@ -59,6 +91,10 @@ ptg$whereIs(rbind(pt1, pt2))
 \item \href{#method-cgalPolygon-print}{\code{cgalPolygon$print()}}
 \item \href{#method-cgalPolygon-area}{\code{cgalPolygon$area()}}
 \item \href{#method-cgalPolygon-boundingBox}{\code{cgalPolygon$boundingBox()}}
+\item \href{#method-cgalPolygon-isCWO}{\code{cgalPolygon$isCWO()}}
+\item \href{#method-cgalPolygon-isCCWO}{\code{cgalPolygon$isCCWO()}}
+\item \href{#method-cgalPolygon-isConvex}{\code{cgalPolygon$isConvex()}}
+\item \href{#method-cgalPolygon-isSimple}{\code{cgalPolygon$isSimple()}}
 \item \href{#method-cgalPolygon-plot}{\code{cgalPolygon$plot()}}
 \item \href{#method-cgalPolygon-whereIs}{\code{cgalPolygon$whereIs()}}
 }
@@ -157,6 +193,100 @@ A 2x2 matrix giving the lower corner of the bounding box in its
 ptg <- cgalPolygon$new(pentagram)
 plot(ptg$boundingBox(), asp = 1)
 polygon(pentagram)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-isCWO"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-isCWO}{}}}
+\subsection{Method \code{isCWO()}}{
+Checks whether the polygon is clockwise oriented.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$isCWO()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A Boolean value.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isCWO()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-isCCWO"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-isCCWO}{}}}
+\subsection{Method \code{isCCWO()}}{
+Checks whether the polygon is counter-clockwise oriented.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$isCCWO()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A Boolean value.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isCCWO()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-isConvex"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-isConvex}{}}}
+\subsection{Method \code{isConvex()}}{
+Checks whether the polygon is convex.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$isConvex()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A Boolean value.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isConvex()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-isSimple"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-isSimple}{}}}
+\subsection{Method \code{isSimple()}}{
+Checks whether the polygon is simple; that means its edges 
+  do not intersect (except two consecutive edges which intersect at 
+  their common vertex)
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$isSimple()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A Boolean value.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+ptg$isSimple()
 }
 \if{html}{\out{</div>}}
 

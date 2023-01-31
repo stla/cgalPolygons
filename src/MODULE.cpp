@@ -12,6 +12,10 @@ RCPP_MODULE(class_CGALpolygon) {
       .field("xptr", &CGALpolygon::xptr)
       .method("area", &CGALpolygon::area)
       .method("boundingBox", &CGALpolygon::boundingBox)
+      .method("isCWO", &CGALpolygon::isCWO)
+      .method("isCCWO", &CGALpolygon::isCCWO)
+      .method("isConvex", &CGALpolygon::isConvex)
+      .method("isSimple", &CGALpolygon::isSimple)
       .method("print", &CGALpolygon::print)
       .method("whereIs", &CGALpolygon::whereIs);
 }

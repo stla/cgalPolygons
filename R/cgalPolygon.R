@@ -74,6 +74,51 @@ cgalPolygon <- R6Class(
     "boundingBox" = function() {
       private[[".CGALpolygon"]]$boundingBox()
     },
+
+    #' @description Checks whether the polygon is clockwise oriented.
+    #' @return A Boolean value.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg$isCWO()
+    "isCWO" = function() {
+      private[[".CGALpolygon"]]$isCWO()
+    },
+
+    
+    #' @description Checks whether the polygon is counter-clockwise oriented.
+    #' @return A Boolean value.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg$isCCWO()
+    "isCCWO" = function() {
+      private[[".CGALpolygon"]]$isCCWO()
+    },
+
+    
+    #' @description Checks whether the polygon is convex.
+    #' @return A Boolean value.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg$isConvex()
+    "isConvex" = function() {
+      private[[".CGALpolygon"]]$isConvex()
+    },
+
+    
+    #' @description Checks whether the polygon is simple; that means its edges 
+    #'   do not intersect (except two consecutive edges which intersect at 
+    #'   their common vertex)
+    #' @return A Boolean value.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' ptg$isSimple()
+    "isSimple" = function() {
+      private[[".CGALpolygon"]]$isSimple()
+    },
     
     #' @description Plot the polygon.
     #' @param ... arguments passed to \code{\link[graphics]{polygon}}
