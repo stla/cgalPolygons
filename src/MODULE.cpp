@@ -11,5 +11,6 @@ RCPP_MODULE(class_CGALpolygon) {
       .constructor<XPtr<Polygon>, const bool>()
       .field("xptr", &CGALpolygon::xptr)
       .method("area", &CGALpolygon::area)
+      .method("boundingBox", &CGALpolygon::boundingBox)
       .method("print", &CGALpolygon::print);
 }

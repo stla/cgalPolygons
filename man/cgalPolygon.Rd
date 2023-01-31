@@ -24,6 +24,23 @@ library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
 ptg$area() # should be 5 / sqrt(130 + 58*sqrt(5))
 5 / sqrt(130 + 58*sqrt(5))
+
+## ------------------------------------------------
+## Method `cgalPolygon$boundingBox`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+plot(ptg$boundingBox(), asp = 1)
+polygon(pentagram)
+
+## ------------------------------------------------
+## Method `cgalPolygon$plot`
+## ------------------------------------------------
+
+library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+plot(ptg, lwd = 3, col = "red")
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -31,6 +48,8 @@ ptg$area() # should be 5 / sqrt(130 + 58*sqrt(5))
 \item \href{#method-cgalPolygon-new}{\code{cgalPolygon$new()}}
 \item \href{#method-cgalPolygon-print}{\code{cgalPolygon$print()}}
 \item \href{#method-cgalPolygon-area}{\code{cgalPolygon$area()}}
+\item \href{#method-cgalPolygon-boundingBox}{\code{cgalPolygon$boundingBox()}}
+\item \href{#method-cgalPolygon-plot}{\code{cgalPolygon$plot()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -102,6 +121,61 @@ A number, the signed area of the polygon; it is positive if the
 ptg <- cgalPolygon$new(pentagram)
 ptg$area() # should be 5 / sqrt(130 + 58*sqrt(5))
 5 / sqrt(130 + 58*sqrt(5))
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-boundingBox"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-boundingBox}{}}}
+\subsection{Method \code{boundingBox()}}{
+Bounding box of the polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$boundingBox()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A 2x2 matrix giving the lower corner of the bounding box in its 
+  first row and the upper corner in its second row.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+plot(ptg$boundingBox(), asp = 1)
+polygon(pentagram)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-plot}{}}}
+\subsection{Method \code{plot()}}{
+Plot the polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$plot(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{arguments passed to \code{\link[graphics]{polygon}}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+No returned value, called for side-effect.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+ptg <- cgalPolygon$new(pentagram)
+plot(ptg, lwd = 3, col = "red")
 }
 \if{html}{\out{</div>}}
 

@@ -15,7 +15,8 @@ cgalPolygon <- R6Class(
   cloneable = FALSE,
   
   private = list(
-    ".CGALpolygon" = NULL
+    ".CGALpolygon" = NULL,
+    ".vertices"    = NULL
   ),
   
   public = list(
@@ -38,6 +39,7 @@ cgalPolygon <- R6Class(
       stopifnot(ncol(vertices) == 2L)
       stopifnot(noMissingValue(vertices))
       private[[".CGALpolygon"]] <- CGALpolygon$new(t(vertices))
+      private[[".vertices"]]    <- vertices
       invisible(self)
     },
     
@@ -58,6 +60,33 @@ cgalPolygon <- R6Class(
     #' 5 / sqrt(130 + 58*sqrt(5))
     "area" = function() {
       private[[".CGALpolygon"]]$area()
+    },
+    
+    #' @description Bounding box of the polygon.
+    #' @return A 2x2 matrix giving the lower corner of the bounding box in its 
+    #'   first row and the upper corner in its second row.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' plot(ptg$boundingBox(), asp = 1)
+    #' polygon(pentagram)
+    "boundingBox" = function() {
+      private[[".CGALpolygon"]]$boundingBox()
+    },
+    
+    #' @description Plot the polygon.
+    #' @param ... arguments passed to \code{\link[graphics]{polygon}}
+    #' @return No returned value, called for side-effect.
+    #' @importFrom graphics plot polygon
+    #' @examples 
+    #' library(cgalPolygons)
+    #' ptg <- cgalPolygon$new(pentagram)
+    #' plot(ptg, lwd = 3, col = "red")
+    "plot" = function(...) {
+      bbox <- private[[".CGALpolygon"]]$boundingBox()
+      plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
+      polygon(private[[".vertices"]], ...)
+      invisible(NULL)
     }
     
   )

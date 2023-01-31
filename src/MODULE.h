@@ -21,7 +21,23 @@ class CGALpolygon {
     EK::FT a = polygon.area();
     return CGAL::to_double<EK::FT>(a);
   }
-
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::NumericMatrix boundingBox() {
+    CGAL::Bbox_2 bbox = polygon.bbox();
+    Rcpp::NumericVector minCorner = {bbox.xmin(), bbox.ymin()};
+    Rcpp::NumericVector maxCorner = {bbox.xmax(), bbox.ymax()};
+    Rcpp::NumericMatrix Corners(2, 2);
+    Corners(0, Rcpp::_) = minCorner;
+    Corners(1, Rcpp::_) = maxCorner;
+    Rcpp::CharacterVector rownames = {"min", "max"};
+    Rcpp::rownames(Corners) = rownames;
+    return Corners;
+  }
+  
+    
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
   void print() {
