@@ -57,6 +57,12 @@ Polygon2WithHoles makePolygonWithHoles(
       outer.push_back(Point2(pt(0), pt(1)));
     }
   }
+  if(!outer.is_simple()) {
+    Rcpp::stop("The outer polygon is not simple.");
+  }
+  if(!outer.is_counterclockwise_oriented()) {
+    outer.reverse_orientation();
+  }
   
   int nholes = HolesPts.size();
   std::vector<Polygon2> holes(nholes);
@@ -67,6 +73,12 @@ Polygon2WithHoles makePolygonWithHoles(
       Rcpp::NumericVector pt = holesPts(Rcpp::_, i);
       holes[h].push_back(Point2(pt(0), pt(1)));
     }
+    if(!holes[h].is_simple()) {
+      Rcpp::stop("Hole " + std::to_string(h+1) + " is not simple.");
+    }
+    if(!holes[h].is_counterclockwise_oriented()) {
+      holes[h].reverse_orientation();
+    }
   }
   
   Polygon2WithHoles plgwh(outer, holes.begin(), holes.end());
@@ -76,10 +88,18 @@ Polygon2WithHoles makePolygonWithHoles(
 
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
-std::list<Polygon2> test(const Polygon2WithHoles& plgwh) {
-  PTD decomp;
-  std::list<Polygon2> convexParts;
-  decomp(plgwh, std::back_inserter(convexParts));
-  return convexParts;
+Rcpp::NumericMatrix getVertices2(const Polygon2& polygon) {
+  const int nverts = polygon.size();
+  Rcpp::NumericMatrix Pts(2, nverts);
+  int i = 0;
+  for(
+    VertexIterator2 vi = polygon.vertices_begin(); 
+    vi != polygon.vertices_end(); ++vi
+  ) {
+    Point vert = *vi;
+    Rcpp::NumericVector pt = 
+      {CGAL::to_double<EK::FT>(vert.x()), CGAL::to_double<EK::FT>(vert.y())};
+    Pts(Rcpp::_, i++) = pt;
+  }
+  return Rcpp::transpose(Pts);
 }
-

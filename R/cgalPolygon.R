@@ -162,6 +162,7 @@ cgalPolygon <- R6Class(
       private[[".CGALpolygon"]]$isSimple()
     },
     
+    
     #' @description Plot the polygon.
     #' @param ... arguments passed to \code{\link[graphics]{polygon}}
     #' @return No returned value, called for side-effect.
@@ -177,6 +178,7 @@ cgalPolygon <- R6Class(
       invisible(NULL)
     },
 
+    
     #' @description Reverse the orientation of the polygon.
     #' @return The \code{cgalPolygon} object, invisibly.
     #' @examples 
@@ -190,6 +192,7 @@ cgalPolygon <- R6Class(
       private[[".vertices"]] <- vertices
       invisible(self)
     },
+    
     
     #' @description Locate point(s) with respect to the polygon. The polygon 
     #'   must be simple.

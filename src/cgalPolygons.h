@@ -11,6 +11,7 @@
 
 // -------------------------------------------------------------------------- //
 typedef Polygon::Vertex_iterator                        VertexIterator;
+typedef Polygon2::Vertex_iterator                       VertexIterator2;
 typedef CGAL::Polygon_triangulation_decomposition_2<EK> PTD;
 
 // -------------------------------------------------------------------------- //
@@ -20,3 +21,4 @@ Rcpp::NumericMatrix getVertices(const Polygon&);
 Polygon2WithHoles makePolygonWithHoles(
   const Rcpp::NumericMatrix&, const Rcpp::List&
 );
+Rcpp::NumericMatrix getVertices2(const Polygon2&);
