@@ -105,6 +105,5 @@ void checkPWH(const Polygon2WithHoles& polygonwh) {
     }
     h++;
   }
-  
 }
 

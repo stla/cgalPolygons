@@ -19,6 +19,16 @@ pwh <- cgalPolygonWithHoles$new(
 pwh
 
 ## ------------------------------------------------
+## Method `cgalPolygonWithHoles$area`
+## ------------------------------------------------
+
+library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+pwh$area() # should be 12
+
+## ------------------------------------------------
 ## Method `cgalPolygonWithHoles$boundingBox`
 ## ------------------------------------------------
 
@@ -70,6 +80,7 @@ pwh$plot(
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-cgalPolygonWithHoles-new}{\code{cgalPolygonWithHoles$new()}}
+\item \href{#method-cgalPolygonWithHoles-area}{\code{cgalPolygonWithHoles$area()}}
 \item \href{#method-cgalPolygonWithHoles-boundingBox}{\code{cgalPolygonWithHoles$boundingBox()}}
 \item \href{#method-cgalPolygonWithHoles-convexParts}{\code{cgalPolygonWithHoles$convexParts()}}
 \item \href{#method-cgalPolygonWithHoles-minkowskiSum}{\code{cgalPolygonWithHoles$minkowskiSum()}}
@@ -107,6 +118,31 @@ pwh <- cgalPolygonWithHoles$new(
   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
 )
 pwh
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-area"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-area}{}}}
+\subsection{Method \code{area()}}{
+Area of the polygon with holes.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$area()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A positive number, the area of the polygon.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+pwh <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+pwh$area() # should be 12
 }
 \if{html}{\out{</div>}}
 

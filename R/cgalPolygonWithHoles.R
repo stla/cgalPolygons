@@ -63,6 +63,19 @@ cgalPolygonWithHoles <- R6Class(
         CGALpolygonWithHoles$new(t(outerVertices), lapply(holes, t))
       invisible(self)
     },
+
+    
+    #' @description Area of the polygon with holes.
+    #' @return A positive number, the area of the polygon.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' pwh <- cgalPolygonWithHoles$new(
+    #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+    #' )
+    #' pwh$area() # should be 12
+    "area" = function() {
+      private[[".CGALpolygonWithHoles"]]$area()
+    },
     
     
     #' @description Bounding box of the polygon with holes.

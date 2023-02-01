@@ -17,7 +17,30 @@ public:
     : polygonwh(*(xptr_.get())), 
       xptr(Rcpp::XPtr<Polygon2WithHoles>(&polygonwh, false)) {}
   
-  
+
+  // -------------------------------------------------------------------------- //
+  // -------------------------------------------------------------------------- //
+  double area() {
+    Polygon2 outer = polygonwh.outer_boundary();
+    if(!outer.is_simple()) {
+      Rcpp::stop("The outer polygon is not simple.");
+    }
+    EK::FT a = outer.area();
+    int h = 1;
+    for(
+      auto hit = polygonwh.holes_begin(); hit != polygonwh.holes_end(); ++hit
+    ) {
+      Polygon2 hole = *hit;
+      if(!hole.is_simple()) {
+        Rcpp::stop("Hole " + std::to_string(h) + " is not simple.");
+      }
+      a -= hole.area();
+      h++;
+    }
+    return CGAL::to_double<EK::FT>(a);
+  }
+
+    
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
   Rcpp::NumericMatrix boundingBox() {
