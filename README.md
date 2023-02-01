@@ -11,6 +11,7 @@ R6 based utilities for polygons.
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/monster.png)
 
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/funnyCurve.png)
 
 
 ## License
