@@ -1,3 +1,8 @@
+getXPtr2 <- function(cPWH){
+  cPWH[[".__enclos_env__"]][["private"]][[".CGALpolygonWithHoles"]][["xptr"]]
+}
+
+
 #' @title R6 class to represent a CGAL polygonWithHoles
 #' @description R6 class to represent a CGAL polygonWithHoles.
 #'
@@ -31,6 +36,13 @@ cgalPolygonWithHoles <- R6Class(
     #' )
     #' pwh
     "initialize" = function(outerVertices, holes = list()) {
+      # one can also initialize from an external pointer, but 
+      # this is hidden to the user
+      if(inherits(outerVertices, "externalptr")) {
+        private[[".CGALpolygonWithHoles"]] <- 
+          CGALpolygonWithHoles$new(outerVertices)
+        return(invisible(self))
+      }
       stopifnot(is.matrix(outerVertices))
       stopifnot(nrow(outerVertices) >= 3L)
       stopifnot(ncol(outerVertices) == 2L)

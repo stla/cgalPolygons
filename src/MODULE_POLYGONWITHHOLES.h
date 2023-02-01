@@ -5,12 +5,18 @@
 class CGALpolygonWithHoles {
 public:
   Polygon2WithHoles polygonwh;
+  Rcpp::XPtr<Polygon2WithHoles> xptr;
 
   CGALpolygonWithHoles(
     const Rcpp::NumericMatrix outer, const Rcpp::List holes
   )
-    : polygonwh(makePolygonWithHoles(outer, holes)) {}
+    : polygonwh(makePolygonWithHoles(outer, holes)),
+      xptr(Rcpp::XPtr<Polygon2WithHoles>(&polygonwh, false)) {}
 
+  CGALpolygonWithHoles(Rcpp::XPtr<Polygon2WithHoles> xptr_)
+    : polygonwh(*(xptr_.get())), 
+      xptr(Rcpp::XPtr<Polygon2WithHoles>(&polygonwh, false)) {}
+  
   
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
@@ -80,6 +86,33 @@ public:
     }
     
     return Out;
+  }
+
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List minkowskiC(Rcpp::XPtr<Polygon2WithHoles> polygonwh2XPtr) {
+    
+    Polygon2WithHoles polygonwh2 = *(polygonwh2XPtr.get());
+    
+    Polygon2WithHoles msum = 
+      CGAL::minkowski_sum_by_reduced_convolution_2(polygonwh, polygonwh2);
+    
+    Polygon2 outer = msum.outer_boundary();
+    Rcpp::NumericMatrix Outer = getVertices<Polygon2>(outer);
+    
+    int nholes = msum.number_of_holes();
+    Rcpp::List Holes(nholes);
+    int h = 0;
+    for(auto hit = msum.holes_begin(); hit != msum.holes_end(); ++hit) {
+      Polygon2 hole = *hit;
+      Holes(h++) = getVertices<Polygon2>(hole);
+    }
+
+    return Rcpp::List::create(
+      Rcpp::Named("outer") = Outer,
+      Rcpp::Named("holes") = Holes
+    );
   }
   
   
