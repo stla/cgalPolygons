@@ -6,9 +6,9 @@ Authors@R:
     person("Stéphane", "Laurent", , "laurent_step@outlook.fr", role = c("aut", "cre"))
 Maintainer: Stéphane Laurent <laurent_step@outlook.fr>
 Description: Provides some utilities for polygons: area calculation,
-    decomposition into convex parts, Minkowski addition, and more. The
-    algorithms are performed by the 'C++' library' CGAL'
-    (<https://www.cgal.org/>).
+    decomposition into convex parts, Minkowski addition, and more.
+    Polygons with holes are supported. The algorithms are performed by the
+    'C++' library' CGAL' (<https://www.cgal.org/>).
 License: GPL-3
 URL: https://github.com/stla/cgalPolygons
 BugReports: https://github.com/stla/cgalPolygons/issues
