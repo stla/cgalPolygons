@@ -110,8 +110,7 @@ cgalPolygonWithHoles <- R6Class(
     #'   to the reference polygon
     #' @param method the method used: \code{"convolution"}, \code{"triangle"} 
     #'   or \code{"vertical"}
-    #' @return A list of matrices; each matrix has two columns and represents 
-    #'   a convex polygon.
+    #' @return A \code{cgalPolygonWithHoles} object.
     #' @examples 
     #' library(cgalPolygons)
     #' square <- cgalPolygonWithHoles$new(
@@ -122,12 +121,15 @@ cgalPolygonWithHoles <- R6Class(
       method <- match.arg(method, c("convolution", "triangle", "vertical"))
       xptr <- getXPtr2(pwh2)
       if(method == "convolution") {
-        private[[".CGALpolygonWithHoles"]]$minkowskiC(xptr)
+        msum <- private[[".CGALpolygonWithHoles"]]$minkowskiC(xptr)
       } else if(method == "triangle") {
-        private[[".CGALpolygonWithHoles"]]$minkowskiT(xptr)
+        msum <- private[[".CGALpolygonWithHoles"]]$minkowskiT(xptr)
       } else {
-        private[[".CGALpolygonWithHoles"]]$minkowskiV(xptr)
+        msum <- private[[".CGALpolygonWithHoles"]]$minkowskiV(xptr)
       }
+      cgalPolygonWithHoles$new(
+        outerVertices = msum[["outer"]], holes = msum[["holes"]]
+      )
     },
 
         
@@ -146,7 +148,7 @@ cgalPolygonWithHoles <- R6Class(
     #' pwh$plot(
     #'   outerpars = list(lwd = 2), density = 10
     #' )
-    "plot" = function(outerpars, ...) {
+    "plot" = function(outerpars = list(), ...) {
       bbox <- private[[".CGALpolygonWithHoles"]]$boundingBox()
       plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
       do.call(function(...) {

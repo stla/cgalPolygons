@@ -198,8 +198,7 @@ or \code{"vertical"}}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A list of matrices; each matrix has two columns and represents 
-  a convex polygon.
+A \code{cgalPolygonWithHoles} object.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
@@ -219,7 +218,7 @@ square <- cgalPolygonWithHoles$new(
 \subsection{Method \code{plot()}}{
 Plot the polygon with holes.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$plot(outerpars, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$plot(outerpars = list(), ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
