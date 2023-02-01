@@ -3,8 +3,8 @@ getXPtr2 <- function(cPWH){
 }
 
 
-#' @title R6 class to represent a CGAL polygonWithHoles
-#' @description R6 class to represent a CGAL polygonWithHoles.
+#' @title R6 class to represent a CGAL polygon with holes
+#' @description R6 class to represent a CGAL polygon with holes.
 #'
 #' @importFrom R6 R6Class
 #' @export
@@ -79,7 +79,8 @@ cgalPolygonWithHoles <- R6Class(
     },
     
     
-    #' @description Decomposition into convex parts of the polygon with holes.
+    #' @description Decomposition into convex parts of the polygon with holes. 
+    #'   The outer polygon as well as the holes must be simple.
     #' @param method the method used: \code{"triangle"} or \code{"vertical"}
     #' @return A list of matrices; each matrix has two columns and represents 
     #'   a convex polygon.

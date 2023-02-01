@@ -2,9 +2,9 @@
 % Please edit documentation in R/cgalPolygonWithHoles.R
 \name{cgalPolygonWithHoles}
 \alias{cgalPolygonWithHoles}
-\title{R6 class to represent a CGAL polygonWithHoles}
+\title{R6 class to represent a CGAL polygon with holes}
 \description{
-R6 class to represent a CGAL polygonWithHoles.
+R6 class to represent a CGAL polygon with holes.
 }
 \examples{
 
@@ -143,7 +143,8 @@ pwh$boundingBox()
 \if{html}{\out{<a id="method-cgalPolygonWithHoles-convexParts"></a>}}
 \if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-convexParts}{}}}
 \subsection{Method \code{convexParts()}}{
-Decomposition into convex parts of the polygon with holes.
+Decomposition into convex parts of the polygon with holes. 
+  The outer polygon as well as the holes must be simple.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$convexParts(method = "triangle")}\if{html}{\out{</div>}}
 }
