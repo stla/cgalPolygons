@@ -28,6 +28,9 @@ R6 based utilities for polygons.
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/msum_star-funnyCurve.png)
 
+- *Decagram + circle with varying radius:*
+
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/minko_circle-decagram.gif)
 
 
 ## License
