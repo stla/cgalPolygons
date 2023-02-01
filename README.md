@@ -7,11 +7,27 @@ R6 based utilities for polygons.
 [![R-CMD-check-valgrind](https://github.com/stla/cgalPolygons/actions/workflows/R-CMD-check-valgrind.yaml/badge.svg)](https://github.com/stla/cgalPolygons/actions/workflows/R-CMD-check-valgrind.yaml)
 <!-- badges: end -->
 
+### Decomposition into convex parts
+
+- *Eight-pointed star:*
+
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/star.png)
+
+- *Monster head:*
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/monster.png)
 
+- *Funny curve:*
+
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/funnyCurve.png)
+
+
+### Minkowski sum
+
+- *Eight-pointed star + funny curve:*
+
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/msum_star-funnyCurve.png)
+
 
 
 ## License
