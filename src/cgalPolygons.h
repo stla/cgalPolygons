@@ -9,11 +9,13 @@
 #include <CGAL/enum.h>
 #include <CGAL/Polygon_triangulation_decomposition_2.h>
 #include <CGAL/Polygon_vertical_decomposition_2.h>
+#include <CGAL/Small_side_angle_bisector_decomposition_2.h>
 #include <CGAL/minkowski_sum_2.h>
 
 // -------------------------------------------------------------------------- //
-typedef CGAL::Polygon_triangulation_decomposition_2<EK> PTD;
-typedef CGAL::Polygon_vertical_decomposition_2<EK>      PVD;
+typedef CGAL::Polygon_triangulation_decomposition_2<EK>     PTD;
+typedef CGAL::Polygon_vertical_decomposition_2<EK>          PVD;
+typedef CGAL::Small_side_angle_bisector_decomposition_2<EK> SSABD;
 
 // -------------------------------------------------------------------------- //
 void Message(const std::string&);

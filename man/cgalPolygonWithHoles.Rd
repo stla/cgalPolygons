@@ -194,8 +194,9 @@ Minkowski sum of the polygon and another polygon.
 \item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object, the polygon to add 
 to the reference polygon}
 
-\item{\code{method}}{the method used: \code{"convolution"}, \code{"triangle"} 
-or \code{"vertical"} (the method should not change the result)}
+\item{\code{method}}{the method used: \code{"convolution"}, \code{"triangle"}, 
+\code{"vertical"} or \code{"optimal"} (the method should not change 
+the result)}
 }
 \if{html}{\out{</div>}}
 }
