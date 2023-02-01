@@ -110,7 +110,8 @@ cgalPolygonWithHoles <- R6Class(
     #'   to the reference polygon
     #' @param method the method used: \code{"convolution"}, \code{"triangle"} 
     #'   or \code{"vertical"}
-    #' @return A \code{cgalPolygonWithHoles} object.
+    #' @return Either a \code{cgalPolygonWithHoles} object, or, in the case if 
+    #'   there is no hole in the Minkowski sum, a \code{cgalPolygon} object.
     #' @examples 
     #' library(cgalPolygons)
     #' square <- cgalPolygonWithHoles$new(
@@ -127,9 +128,14 @@ cgalPolygonWithHoles <- R6Class(
       } else {
         msum <- private[[".CGALpolygonWithHoles"]]$minkowskiV(xptr)
       }
-      cgalPolygonWithHoles$new(
-        outerVertices = msum[["outer"]], holes = msum[["holes"]]
-      )
+      holes <- msum[["holes"]]
+      if(length(holes) == 0L) {
+        cgalPolygonWithHoles$new(vertices = msum[["outer"]])
+      } else {
+        cgalPolygonWithHoles$new(
+          outerVertices = msum[["outer"]], holes = holes
+        )
+      }
     },
 
         

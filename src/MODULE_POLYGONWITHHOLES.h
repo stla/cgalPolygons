@@ -36,6 +36,8 @@ public:
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
   Rcpp::List convexPartsT() {
+
+    checkPWH(polygonwh);
     
     PTD decomposition;
     std::list<Polygon2> convexParts;
@@ -64,6 +66,8 @@ public:
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
   Rcpp::List convexPartsV() {
+    
+    checkPWH(polygonwh);
     
     PVD decomposition;
     std::list<Polygon2> convexParts;

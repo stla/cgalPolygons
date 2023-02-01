@@ -198,7 +198,8 @@ or \code{"vertical"}}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A \code{cgalPolygonWithHoles} object.
+Either a \code{cgalPolygonWithHoles} object, or, in the case if 
+  there is no hole in the Minkowski sum, a \code{cgalPolygon} object.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}

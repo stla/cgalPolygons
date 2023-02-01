@@ -23,3 +23,4 @@ Polygon2WithHoles makePolygonWithHoles(
 );
 template <typename PolygonT>
 Rcpp::NumericMatrix getVertices(const PolygonT&);
+void checkPWH(const Polygon2WithHoles&);

@@ -39,7 +39,7 @@ Polygon2WithHoles makePolygonWithHoles(
     }
   }
   if(!outer.is_simple()) {
-    Rcpp::stop("The outer polygon is not simple.");
+    Rcpp::warning("The outer polygon is not simple.");
   }
   if(!outer.is_counterclockwise_oriented()) {
     outer.reverse_orientation();
@@ -55,7 +55,7 @@ Polygon2WithHoles makePolygonWithHoles(
       holes[h].push_back(Point2(pt(0), pt(1)));
     }
     if(!holes[h].is_simple()) {
-      Rcpp::stop("Hole " + std::to_string(h+1) + " is not simple.");
+      Rcpp::warning("Hole " + std::to_string(h+1) + " is not simple.");
     }
     if(!holes[h].is_counterclockwise_oriented()) {
       holes[h].reverse_orientation();
@@ -88,3 +88,23 @@ Rcpp::NumericMatrix getVertices(const PolygonT& polygon) {
 
 template Rcpp::NumericMatrix getVertices<Polygon>(const Polygon&);
 template Rcpp::NumericMatrix getVertices<Polygon2>(const Polygon2&);
+
+
+// -------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+void checkPWH(const Polygon2WithHoles& polygonwh) {
+  Polygon2 outer = polygonwh.outer_boundary();
+  if(!outer.is_simple()) {
+    Rcpp::stop("The outer polygon is not simple.");
+  }
+  int h = 1;
+  for(auto hit = polygonwh.holes_begin(); hit != polygonwh.holes_end(); ++hit) {
+    Polygon2 hole = *hit;
+    if(!hole.is_simple()) {
+      Rcpp::stop("Hole " + std::to_string(h) + " is not simple.");
+    }
+    h++;
+  }
+  
+}
+
