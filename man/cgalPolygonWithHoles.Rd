@@ -49,9 +49,10 @@ invisible(
 ## ------------------------------------------------
 
 library(cgalPolygons)
-square <- cgalPolygonWithHoles$new(
-  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
-)
+plg1 <- cgalPolygonWithHoles$new(decagram)
+plg2 <- cgalPolygonWithHoles$new(star)
+minko <- plg1$minkowskiSum(plg2)
+minko$plot(lwd = 2, col = "limegreen")
 
 ## ------------------------------------------------
 ## Method `cgalPolygonWithHoles$plot`
@@ -193,7 +194,7 @@ Minkowski sum of the polygon and another polygon.
 to the reference polygon}
 
 \item{\code{method}}{the method used: \code{"convolution"}, \code{"triangle"} 
-or \code{"vertical"}}
+or \code{"vertical"} (the method should not change the result)}
 }
 \if{html}{\out{</div>}}
 }
@@ -204,9 +205,10 @@ Either a \code{cgalPolygonWithHoles} object, or, in the case if
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{library(cgalPolygons)
-square <- cgalPolygonWithHoles$new(
-  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
-)
+plg1 <- cgalPolygonWithHoles$new(decagram)
+plg2 <- cgalPolygonWithHoles$new(star)
+minko <- plg1$minkowskiSum(plg2)
+minko$plot(lwd = 2, col = "limegreen")
 }
 \if{html}{\out{</div>}}
 

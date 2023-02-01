@@ -109,14 +109,15 @@ cgalPolygonWithHoles <- R6Class(
     #' @param pwh2 a \code{cgalPolygonWithHoles} object, the polygon to add 
     #'   to the reference polygon
     #' @param method the method used: \code{"convolution"}, \code{"triangle"} 
-    #'   or \code{"vertical"}
+    #'   or \code{"vertical"} (the method should not change the result)
     #' @return Either a \code{cgalPolygonWithHoles} object, or, in the case if 
     #'   there is no hole in the Minkowski sum, a \code{cgalPolygon} object.
     #' @examples 
     #' library(cgalPolygons)
-    #' square <- cgalPolygonWithHoles$new(
-    #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
-    #' )
+    #' plg1 <- cgalPolygonWithHoles$new(decagram)
+    #' plg2 <- cgalPolygonWithHoles$new(star)
+    #' minko <- plg1$minkowskiSum(plg2)
+    #' minko$plot(lwd = 2, col = "limegreen")
     "minkowskiSum" = function(pwh2, method = "convolution") {
       stopifnot(isCGALpolygonWithHoles(pwh2))
       method <- match.arg(method, c("convolution", "triangle", "vertical"))

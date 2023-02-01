@@ -5,6 +5,5 @@ square <- cgalPolygonWithHoles$new(
 
 plg1 <- cgalPolygonWithHoles$new(decagram)
 plg2 <- cgalPolygonWithHoles$new(star)
-
-msum <- plg1$minkowskiSum(plg2)
-msum$plot(lwd = 2)
+minko <- plg1$minkowskiSum(plg2)
+minko$plot(lwd = 2, col = "limegreen")
