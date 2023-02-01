@@ -2,7 +2,9 @@ library(cgalPolygons)
 square <- cgalPolygonWithHoles$new(
   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
 )
-epstar <- cgalPolygonWithHoles$new(decagram)
 
-msum <- square$minkowskiSum(epstar)
-msum$plot()
+plg1 <- cgalPolygonWithHoles$new(decagram)
+plg2 <- cgalPolygonWithHoles$new(star)
+
+msum <- plg1$minkowskiSum(plg2)
+msum$plot(lwd = 2)

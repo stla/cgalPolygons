@@ -130,6 +130,7 @@ cgalPolygonWithHoles <- R6Class(
       }
       holes <- msum[["holes"]]
       if(length(holes) == 0L) {
+        message("No hole in the Minkowski sum.")
         cgalPolygon$new(vertices = msum[["outer"]])
       } else {
         cgalPolygonWithHoles$new(
