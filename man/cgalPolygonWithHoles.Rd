@@ -72,7 +72,7 @@ pwh$plot(
 \subsection{Method \code{new()}}{
 Creates a new \code{cgalpolygonWithHoles} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$new(outerVertices, holes)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$new(outerVertices, holes = list())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -82,7 +82,7 @@ Creates a new \code{cgalpolygonWithHoles} object.
 of the outer polygon}
 
 \item{\code{holes}}{a list of numeric matrices, each representing the vertices 
-of a hole}
+of a hole; an empty list is allowed}
 }
 \if{html}{\out{</div>}}
 }
@@ -222,7 +222,7 @@ Print the \code{cgalPolygonWithHoles} object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-No value, just prints some information about the polygonWithHoles.
+No value, just prints some information about the polygon.
 }
 }
 }

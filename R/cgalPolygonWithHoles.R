@@ -22,7 +22,7 @@ cgalPolygonWithHoles <- R6Class(
     #' @param outerVertices a numeric matrix with two columns, the vertices 
     #'   of the outer polygon
     #' @param holes a list of numeric matrices, each representing the vertices 
-    #'   of a hole
+    #'   of a hole; an empty list is allowed
     #' @return A \code{cgalPolygonWithHoles} object.
     #' @examples 
     #' library(cgalPolygons)
@@ -30,7 +30,7 @@ cgalPolygonWithHoles <- R6Class(
     #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
     #' )
     #' pwh
-    "initialize" = function(outerVertices, holes) {
+    "initialize" = function(outerVertices, holes = list()) {
       stopifnot(is.matrix(outerVertices))
       stopifnot(nrow(outerVertices) >= 3L)
       stopifnot(ncol(outerVertices) == 2L)
@@ -125,7 +125,7 @@ cgalPolygonWithHoles <- R6Class(
     
     #' @description Print the \code{cgalPolygonWithHoles} object.
     #' @param ... ignored
-    #' @return No value, just prints some information about the polygonWithHoles.
+    #' @return No value, just prints some information about the polygon.
     "print" = function(...) {
       private[[".CGALpolygonWithHoles"]]$print()
     }

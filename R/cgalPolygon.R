@@ -37,6 +37,7 @@ cgalPolygon <- R6Class(
       }
       stopifnot(is.matrix(vertices))
       stopifnot(ncol(vertices) == 2L)
+      stopifnot(nrow(vertices) >= 3L)
       storage.mode(vertices) <- "double"
       stopifnot(noMissingValue(vertices))
       private[[".CGALpolygon"]] <- CGALpolygon$new(t(vertices))
