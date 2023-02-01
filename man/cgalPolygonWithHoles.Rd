@@ -45,6 +45,15 @@ invisible(
 )
 
 ## ------------------------------------------------
+## Method `cgalPolygonWithHoles$minkowskiSum`
+## ------------------------------------------------
+
+library(cgalPolygons)
+square <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+)
+
+## ------------------------------------------------
 ## Method `cgalPolygonWithHoles$plot`
 ## ------------------------------------------------
 
@@ -62,6 +71,7 @@ pwh$plot(
 \item \href{#method-cgalPolygonWithHoles-new}{\code{cgalPolygonWithHoles$new()}}
 \item \href{#method-cgalPolygonWithHoles-boundingBox}{\code{cgalPolygonWithHoles$boundingBox()}}
 \item \href{#method-cgalPolygonWithHoles-convexParts}{\code{cgalPolygonWithHoles$convexParts()}}
+\item \href{#method-cgalPolygonWithHoles-minkowskiSum}{\code{cgalPolygonWithHoles$minkowskiSum()}}
 \item \href{#method-cgalPolygonWithHoles-plot}{\code{cgalPolygonWithHoles$plot()}}
 \item \href{#method-cgalPolygonWithHoles-print}{\code{cgalPolygonWithHoles$print()}}
 }
@@ -160,6 +170,42 @@ invisible(
   lapply(cxparts, function(cxpart) {
     polygon(cxpart, lwd = 2)
   })
+)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-minkowskiSum"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-minkowskiSum}{}}}
+\subsection{Method \code{minkowskiSum()}}{
+Minkowski sum of the polygon and another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$minkowskiSum(pwh2, method = "convolution")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object, the polygon to add 
+to the reference polygon}
+
+\item{\code{method}}{the method used: \code{"convolution"}, \code{"triangle"} 
+or \code{"vertical"}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list of matrices; each matrix has two columns and represents 
+  a convex polygon.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+square <- cgalPolygonWithHoles$new(
+  squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
 )
 }
 \if{html}{\out{</div>}}

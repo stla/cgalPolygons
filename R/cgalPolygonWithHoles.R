@@ -104,7 +104,33 @@ cgalPolygonWithHoles <- R6Class(
       }
     },
     
-    
+
+    #' @description Minkowski sum of the polygon and another polygon.
+    #' @param pwh2 a \code{cgalPolygonWithHoles} object, the polygon to add 
+    #'   to the reference polygon
+    #' @param method the method used: \code{"convolution"}, \code{"triangle"} 
+    #'   or \code{"vertical"}
+    #' @return A list of matrices; each matrix has two columns and represents 
+    #'   a convex polygon.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' square <- cgalPolygonWithHoles$new(
+    #'   squareWithHole[["outerSquare"]], list(squareWithHole[["innerSquare"]])
+    #' )
+    "minkowskiSum" = function(pwh2, method = "convolution") {
+      stopifnot(isCGALpolygonWithHoles(pwh2))
+      method <- match.arg(method, c("convolution", "triangle", "vertical"))
+      xptr <- getXPtr2(pwh2)
+      if(method == "convolution") {
+        private[[".CGALpolygonWithHoles"]]$minkowskiC(xptr)
+      } else if(method == "triangle") {
+        private[[".CGALpolygonWithHoles"]]$minkowskiT(xptr)
+      } else {
+        private[[".CGALpolygonWithHoles"]]$minkowskiV(xptr)
+      }
+    },
+
+        
     #' @description Plot the polygon with holes.
     #' @param outerpars named list of arguments passed to 
     #'   \code{\link[graphics]{polygon}} for the outer polygon

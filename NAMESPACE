@@ -3,6 +3,7 @@
 export(cgalPolygon)
 export(cgalPolygonWithHoles)
 importFrom(R6,R6Class)
+importFrom(R6,is.R6)
 importFrom(Rcpp,evalCpp)
 importFrom(Rcpp,setRcppClass)
 importFrom(graphics,plot)
