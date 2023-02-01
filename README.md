@@ -7,6 +7,8 @@ R6 based utilities for polygons.
 [![R-CMD-check-valgrind](https://github.com/stla/cgalPolygons/actions/workflows/R-CMD-check-valgrind.yaml/badge.svg)](https://github.com/stla/cgalPolygons/actions/workflows/R-CMD-check-valgrind.yaml)
 <!-- badges: end -->
 
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/star.png)
+
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/monster.png)
 
 
