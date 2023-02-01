@@ -130,7 +130,7 @@ cgalPolygonWithHoles <- R6Class(
       }
       holes <- msum[["holes"]]
       if(length(holes) == 0L) {
-        cgalPolygonWithHoles$new(vertices = msum[["outer"]])
+        cgalPolygon$new(vertices = msum[["outer"]])
       } else {
         cgalPolygonWithHoles$new(
           outerVertices = msum[["outer"]], holes = holes
