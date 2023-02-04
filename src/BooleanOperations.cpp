@@ -25,7 +25,7 @@ Rcpp::List Intersection(
     Message("The intersection consists in one polygon.");
     int nholes = Plgs[0].number_of_holes();
     if(nholes == 0) {
-      Message("It has no hole.");
+      Message("It doesn't have any hole.");
     } else if(nholes == 1) {
       Message("It has one hole.");
     } else {
@@ -76,7 +76,7 @@ Rcpp::List Subtract(
     Message("The difference consists in one polygon.");
     int nholes = Plgs[0].number_of_holes();
     if(nholes == 0) {
-      Message("It has no hole.");
+      Message("It doesn't have any hole.");
     } else if(nholes == 1) {
       Message("It has one hole.");
     } else {
@@ -127,7 +127,7 @@ Rcpp::List Symdiff(
     Message("The symmetric difference consists in one polygon.");
     int nholes = Plgs[0].number_of_holes();
     if(nholes == 0) {
-      Message("It has no hole.");
+      Message("It doesn't have any hole.");
     } else if(nholes == 1) {
       Message("It has one hole.");
     } else {
@@ -179,7 +179,7 @@ Rcpp::List Union(
     Message("The union consists in one polygon.");
     int nholes = Plgs[0].number_of_holes();
     if(nholes == 0) {
-      Message("It has no hole.");
+      Message("It doesn't have any hole.");
     } else if(nholes == 1) {
       Message("It has one hole.");
     } else {

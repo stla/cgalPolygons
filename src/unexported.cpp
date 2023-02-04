@@ -84,9 +84,7 @@ Polygon2WithHoles makePolygonWithHoles(
       holes[h].reverse_orientation();
     }
   }
-  
-  Polygon2WithHoles plgwh(outer, holes.begin(), holes.end());
-  
+
   if(isSimple) {
     int h = 1;
     for(auto hit = holes.begin(); hit != holes.end(); ++hit) {
@@ -100,6 +98,8 @@ Polygon2WithHoles makePolygonWithHoles(
       h++;
     }
   }
+  
+  Polygon2WithHoles plgwh(outer, holes.begin(), holes.end());
   
   return plgwh;
 }
@@ -172,4 +172,20 @@ Rcpp::List returnPolygonWithHoles(const Polygon2WithHoles& polygonwh) {
     Rcpp::Named("outer") = Outer,
     Rcpp::Named("holes") = Holes
   );
+}
+
+
+// -------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+Polygon2WithHoles polygonToPolygon2WithHoles(const Polygon& polygon) {
+  Polygon2 outer;
+  for(
+    Polygon::Vertex_iterator vi = polygon.vertices_begin(); 
+                             vi != polygon.vertices_end(); ++vi
+  ) {
+    outer.push_back(*vi);
+  }
+  std::vector<Polygon2> holes(0);
+  Polygon2WithHoles plgwh(outer, holes.begin(), holes.end());
+  return plgwh;
 }
