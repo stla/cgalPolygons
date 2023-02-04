@@ -76,7 +76,7 @@ Rcpp::NumericMatrix getVertices(const PolygonT& polygon) {
   int i = 0;
   for(
     typename PolygonT::Vertex_iterator vi = polygon.vertices_begin(); 
-    vi != polygon.vertices_end(); ++vi
+                                       vi != polygon.vertices_end(); ++vi
   ) {
     Point vert = *vi;
     Rcpp::NumericVector pt = 
@@ -88,6 +88,23 @@ Rcpp::NumericMatrix getVertices(const PolygonT& polygon) {
 
 template Rcpp::NumericMatrix getVertices<Polygon>(const Polygon&);
 template Rcpp::NumericMatrix getVertices<Polygon2>(const Polygon2&);
+
+
+// -------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+bool contains(const Polygon2& polygon1, const Polygon2& polygon2) {
+  for(
+    Polygon2::Vertex_iterator vi = polygon2.vertices_begin(); 
+                              vi != polygon2.vertices_end(); ++vi
+  ) {
+    Point2 vert = *vi;
+    CGAL::Bounded_side side = polygon1.bounded_side(vert);
+    if(side == CGAL::ON_UNBOUNDED_SIDE) {
+      return false;
+    }
+  }
+  return true;
+}
 
 
 // -------------------------------------------------------------------------- //
@@ -105,10 +122,10 @@ void checkPWH(const Polygon2WithHoles& polygonwh) {
     if(!hole.is_simple()) {
       Rcpp::stop("Hole " + std::to_string(h) + " is not simple.");
     }
-    if(CGAL::do_intersect(outer, hole)) {
+    if(!contains(outer, hole)) {
       Rcpp::stop(
-        "The outer polygon and hole " + std::to_string(h) + 
-          " intersect each other."
+        "Hole " + std::to_string(h) + 
+          " is not contained in the outer polygon."
       );
     }
     h++;
