@@ -17,14 +17,14 @@ R6 based utilities for polygons.
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/monster.png)
 
-- *Funny curve:*
+- *Sun curve with a hole:*
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/funnyCurve.png)
 
 
 ### Minkowski sum
 
-- *Eight-pointed star + funny curve:*
+- *Eight-pointed star + sun curve:*
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/msum_star-funnyCurve.png)
 
