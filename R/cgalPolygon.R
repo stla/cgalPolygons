@@ -166,15 +166,19 @@ cgalPolygon <- R6Class(
     
     #' @description Plot the polygon.
     #' @param ... arguments passed to \code{\link[graphics]{polygon}}
+    #' @param new Boolean, whether to create a new plot
     #' @return No returned value, called for side-effect.
     #' @importFrom graphics plot polygon
     #' @examples 
     #' library(cgalPolygons)
     #' ptg <- cgalPolygon$new(pentagram)
     #' ptg$plot(lwd = 3, col = "red")
-    "plot" = function(...) {
-      bbox <- private[[".CGALpolygon"]]$boundingBox()
-      plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
+    "plot" = function(..., new = TRUE) {
+      stopifnot(isBoolean(new))
+      if(new) {
+        bbox <- private[[".CGALpolygon"]]$boundingBox()
+        plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
+      }
       polygon(private[[".vertices"]], ...)
       invisible(NULL)
     },

@@ -55,6 +55,33 @@ invisible(
 )
 
 ## ------------------------------------------------
+## Method `cgalPolygonWithHoles$intersection`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# intersection
+plgList <- plg1$intersection(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+
+## ------------------------------------------------
 ## Method `cgalPolygonWithHoles$minkowskiSum`
 ## ------------------------------------------------
 
@@ -252,6 +279,35 @@ Intersection of the polygon with another polygon.
 A list whose each element is either a \code{cgalPolygon} object
   or a \code{cgalPolygonWithHoles} object.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# intersection
+plgList <- plg1$intersection(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-cgalPolygonWithHoles-minkowskiSum"></a>}}

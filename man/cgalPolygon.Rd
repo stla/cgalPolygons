@@ -396,13 +396,15 @@ ptg$isSimple()
 \subsection{Method \code{plot()}}{
 Plot the polygon.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$plot(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$plot(..., new = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{...}}{arguments passed to \code{\link[graphics]{polygon}}}
+
+\item{\code{new}}{Boolean, whether to create a new plot}
 }
 \if{html}{\out{</div>}}
 }
