@@ -99,9 +99,7 @@ Polygon2WithHoles makePolygonWithHoles(
       }
       h++;
     }
-    
   }
-  
   
   return plgwh;
 }
