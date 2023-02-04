@@ -2,6 +2,7 @@
 
 export(cgalPolygon)
 export(cgalPolygonWithHoles)
+export(pgnsIntersection)
 importFrom(R6,R6Class)
 importFrom(R6,is.R6)
 importFrom(Rcpp,evalCpp)
