@@ -24,6 +24,25 @@ Polygon makePolygon(const Rcpp::NumericMatrix& pts) {
 }
 
 
+
+
+// -------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+bool contains(const Polygon2& polygon1, const Polygon2& polygon2) {
+  for(
+    Polygon2::Vertex_iterator vi = polygon2.vertices_begin(); 
+    vi != polygon2.vertices_end(); ++vi
+  ) {
+    Point2 vert = *vi;
+    CGAL::Bounded_side side = polygon1.bounded_side(vert);
+    if(side == CGAL::ON_UNBOUNDED_SIDE) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
 Polygon2WithHoles makePolygonWithHoles(
@@ -38,9 +57,13 @@ Polygon2WithHoles makePolygonWithHoles(
       outer.push_back(Point2(pt(0), pt(1)));
     }
   }
+  
+  bool isSimple = true;
   if(!outer.is_simple()) {
     Rcpp::warning("The outer polygon is not simple.");
-  }
+    isSimple = false;
+  } 
+  
   if(!outer.is_counterclockwise_oriented()) {
     outer.reverse_orientation();
   }
@@ -63,6 +86,23 @@ Polygon2WithHoles makePolygonWithHoles(
   }
   
   Polygon2WithHoles plgwh(outer, holes.begin(), holes.end());
+  
+  if(isSimple) {
+    int h = 1;
+    for(auto hit = holes.begin(); hit != holes.end(); ++hit) {
+      Polygon2 hole = *hit;
+      if(!contains(outer, hole)) {
+        Rcpp::stop(
+          "Hole " + std::to_string(h) + 
+            " is not contained in the outer polygon."
+        );
+      }
+      h++;
+    }
+    
+  }
+  
+  
   return plgwh;
 }
 
@@ -92,23 +132,6 @@ template Rcpp::NumericMatrix getVertices<Polygon2>(const Polygon2&);
 
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
-bool contains(const Polygon2& polygon1, const Polygon2& polygon2) {
-  for(
-    Polygon2::Vertex_iterator vi = polygon2.vertices_begin(); 
-                              vi != polygon2.vertices_end(); ++vi
-  ) {
-    Point2 vert = *vi;
-    CGAL::Bounded_side side = polygon1.bounded_side(vert);
-    if(side == CGAL::ON_UNBOUNDED_SIDE) {
-      return false;
-    }
-  }
-  return true;
-}
-
-
-// -------------------------------------------------------------------------- //
-// -------------------------------------------------------------------------- //
 void checkPWH(const Polygon2WithHoles& polygonwh) {
   
   Polygon2 outer = polygonwh.outer_boundary();
@@ -121,12 +144,6 @@ void checkPWH(const Polygon2WithHoles& polygonwh) {
     Polygon2 hole = *hit;
     if(!hole.is_simple()) {
       Rcpp::stop("Hole " + std::to_string(h) + " is not simple.");
-    }
-    if(!contains(outer, hole)) {
-      Rcpp::stop(
-        "Hole " + std::to_string(h) + 
-          " is not contained in the outer polygon."
-      );
     }
     h++;
   }
