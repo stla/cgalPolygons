@@ -40,4 +40,6 @@ Rcpp::List Subtract(const Polygon2WithHoles&, const Polygon2WithHoles&);
 Rcpp::List Symdiff(const Polygon2WithHoles&, const Polygon2WithHoles&);
 Rcpp::List Union(const Polygon2WithHoles&, const Polygon2WithHoles&);
 
+Polygon2 polygonToPolygon2(const Polygon&);
+
 Polygon2WithHoles polygonToPolygon2WithHoles(Polygon&);

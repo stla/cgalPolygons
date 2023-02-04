@@ -216,6 +216,45 @@ cgalPolygon <- R6Class(
     },
     
     
+    #' @description Minkowski sum of the polygon and another polygon.
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object, the polygon to add to the reference polygon
+    #' @return Either a \code{cgalPolygonWithHoles} object, or, in the case if 
+    #'   there is no hole in the Minkowski sum, a \code{cgalPolygon} object.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' plg1 <- cgalPolygon$new(decagram)
+    #' plg2 <- cgalPolygon$new(star)
+    #' minko <- plg1$minkowskiSum(plg2)
+    #' minko$plot(lwd = 2, col = "yellowgreen")
+    "minkowskiSum" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygonWithHoles(plg2)) {
+        return(plg2$minkowskiSum(self, method = "convolution"))
+      }
+      xptr <- getXPtr(plg2)
+      msum <- private[[".CGALpolygon"]]$minkowskiC(xptr)
+      holes <- msum[["holes"]]
+      nholes <- length(holes)
+      if(nholes == 0L) {
+        message("No hole in the Minkowski sum.")
+        cgalPolygon$new(vertices = msum[["outer"]])
+      } else {
+        if(nholes == 1L){
+          msg <- "There is one hole in the Minkowski sum."
+        } else {
+          msg <- sprintf(
+            "There are %d holes in the Minkowski sum.", nholes
+          )
+        }
+        message(msg)
+        cgalPolygonWithHoles$new(
+          outerVertices = msum[["outer"]], holes = holes
+        )
+      }
+    },
+    
+    
     #' @description Plot the polygon.
     #' @param ... arguments passed to \code{\link[graphics]{polygon}}
     #' @param new Boolean, whether to create a new plot

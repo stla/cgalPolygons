@@ -116,6 +116,16 @@ ptg <- cgalPolygon$new(pentagram)
 ptg$isSimple()
 
 ## ------------------------------------------------
+## Method `cgalPolygon$minkowskiSum`
+## ------------------------------------------------
+
+library(cgalPolygons)
+plg1 <- cgalPolygon$new(decagram)
+plg2 <- cgalPolygon$new(star)
+minko <- plg1$minkowskiSum(plg2)
+minko$plot(lwd = 2, col = "yellowgreen")
+
+## ------------------------------------------------
 ## Method `cgalPolygon$plot`
 ## ------------------------------------------------
 
@@ -238,6 +248,7 @@ ptg$whereIs(rbind(pt1, pt2))
 \item \href{#method-cgalPolygon-isCCWO}{\code{cgalPolygon$isCCWO()}}
 \item \href{#method-cgalPolygon-isConvex}{\code{cgalPolygon$isConvex()}}
 \item \href{#method-cgalPolygon-isSimple}{\code{cgalPolygon$isSimple()}}
+\item \href{#method-cgalPolygon-minkowskiSum}{\code{cgalPolygon$minkowskiSum()}}
 \item \href{#method-cgalPolygon-plot}{\code{cgalPolygon$plot()}}
 \item \href{#method-cgalPolygon-reverseOrientation}{\code{cgalPolygon$reverseOrientation()}}
 \item \href{#method-cgalPolygon-subtract}{\code{cgalPolygon$subtract()}}
@@ -547,6 +558,40 @@ A Boolean value.
 \preformatted{library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
 ptg$isSimple()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-minkowskiSum"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-minkowskiSum}{}}}
+\subsection{Method \code{minkowskiSum()}}{
+Minkowski sum of the polygon and another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$minkowskiSum(plg2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object, the polygon to add to the reference polygon}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Either a \code{cgalPolygonWithHoles} object, or, in the case if 
+  there is no hole in the Minkowski sum, a \code{cgalPolygon} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+plg1 <- cgalPolygon$new(decagram)
+plg2 <- cgalPolygon$new(star)
+minko <- plg1$minkowskiSum(plg2)
+minko$plot(lwd = 2, col = "yellowgreen")
 }
 \if{html}{\out{</div>}}
 

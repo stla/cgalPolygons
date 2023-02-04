@@ -197,6 +197,20 @@ class CGALpolygon {
   
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
+  Rcpp::List minkowskiC(Rcpp::XPtr<Polygon> polygon2XPtr) {
+    
+    Polygon polygon2 = *(polygon2XPtr.get());
+    
+    Polygon2WithHoles msum = CGAL::minkowski_sum_by_reduced_convolution_2(
+      polygonToPolygon2(polygon), polygonToPolygon2(polygon2)
+    );
+    
+    return returnPolygonWithHoles(msum);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
   Rcpp::List optimalConvexParts() {
     
     if(!polygon.is_simple()) {

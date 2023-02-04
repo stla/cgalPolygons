@@ -23,6 +23,7 @@ RCPP_MODULE(class_CGALpolygon) {
     .method("isCCWO", &CGALpolygon::isCCWO)
     .method("isConvex", &CGALpolygon::isConvex)
     .method("isSimple", &CGALpolygon::isSimple)
+    .method("minkowskiC", &CGALpolygon::minkowskiC)
     .method("optimalConvexParts", &CGALpolygon::optimalConvexParts)
     .method("print", &CGALpolygon::print)
     .method("reverseOrientation", &CGALpolygon::reverseOrientation)
