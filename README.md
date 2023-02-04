@@ -33,6 +33,12 @@ R6 based utilities for polygons.
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/minko_circle-decagram.gif)
 
 
+### Boolean operations
+
+- *Intersection:*
+
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/boolop_intersection.png)
+
 ## License
 
 This package is provided under the GPL-3 license but it uses the C++ library 

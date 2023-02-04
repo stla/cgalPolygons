@@ -174,6 +174,7 @@ cgalPolygonWithHoles <- R6Class(
     #'   \code{\link[graphics]{polygon}} for the outer polygon
     #' @param ... arguments passed to \code{\link[graphics]{polygon}} for the 
     #'   holes
+    #' @param new Boolean, whether to create a new plot
     #' @return No returned value, called for side-effect.
     #' @importFrom graphics plot polygon
     #' @examples 
@@ -184,9 +185,12 @@ cgalPolygonWithHoles <- R6Class(
     #' pwh$plot(
     #'   outerpars = list(lwd = 2), density = 10
     #' )
-    "plot" = function(outerpars = list(), ...) {
-      bbox <- private[[".CGALpolygonWithHoles"]]$boundingBox()
-      plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
+    "plot" = function(outerpars = list(), ..., new = TRUE) {
+      stopifnot(isBoolean(new))
+      if(new) {
+        bbox <- private[[".CGALpolygonWithHoles"]]$boundingBox()
+        plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
+      }
       do.call(function(...) {
         polygon(private[[".vs_outer"]], ...)
       }, outerpars)

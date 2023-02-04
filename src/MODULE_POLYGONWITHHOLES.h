@@ -34,7 +34,7 @@ public:
       if(!hole.is_simple()) {
         Rcpp::stop("Hole " + std::to_string(h) + " is not simple.");
       }
-      a -= hole.area();
+      a += hole.area(); // we *add* the area since it is negative
       h++;
     }
     return CGAL::to_double<EK::FT>(a);
