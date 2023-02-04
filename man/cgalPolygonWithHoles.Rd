@@ -412,8 +412,8 @@ Minkowski sum of the polygon and another polygon.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{plg2}}{a \code{cgalPolygonWithHoles} object, the polygon to add 
-to the reference polygon}
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object, the polygon to add to the reference polygon}
 
 \item{\code{method}}{the method used: \code{"convolution"}, \code{"triangle"}, 
 \code{"vertical"} or \code{"optimal"} (the method should not change 

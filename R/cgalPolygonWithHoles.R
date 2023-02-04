@@ -197,8 +197,8 @@ cgalPolygonWithHoles <- R6Class(
     
     
     #' @description Minkowski sum of the polygon and another polygon.
-    #' @param plg2 a \code{cgalPolygonWithHoles} object, the polygon to add 
-    #'   to the reference polygon
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object, the polygon to add to the reference polygon
     #' @param method the method used: \code{"convolution"}, \code{"triangle"}, 
     #'   \code{"vertical"} or \code{"optimal"} (the method should not change 
     #'   the result)
@@ -211,13 +211,27 @@ cgalPolygonWithHoles <- R6Class(
     #' minko <- plg1$minkowskiSum(plg2)
     #' minko$plot(lwd = 2, col = "limegreen")
     "minkowskiSum" = function(plg2, method = "convolution") {
-      stopifnot(isCGALpolygonWithHoles(plg2))
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
       method <- match.arg(
         method, c("convolution", "triangle", "vertical", "optimal")
       )
-      xptr <- getXPtr2(plg2)
+      if(isCGALpolygon(plg2)) {
+        if(method != "convolution") {
+          stop(paste0(
+            "Only the 'convolution' method is available for a ", 
+            "`cgalPolygon` object (polygon without hole)." 
+          ))
+        }
+        xptr <- getXPtr(plg2)
+      } else {
+        xptr <- getXPtr2(plg2)
+      }
       if(method == "convolution") {
-        msum <- private[[".CGALpolygonWithHoles"]]$minkowskiC(xptr)
+        if(isCGALpolygon(plg2)) {
+          msum <- private[[".CGALpolygonWithHoles"]]$minkowskiC2(xptr)
+        } else {
+          msum <- private[[".CGALpolygonWithHoles"]]$minkowskiC(xptr)
+        }
       } else if(method == "triangle") {
         msum <- private[[".CGALpolygonWithHoles"]]$minkowskiT(xptr)
       } else if(method == "vertical") {

@@ -195,6 +195,20 @@ public:
     
     return returnPolygonWithHoles(msum);
   }
+
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List minkowskiC2(Rcpp::XPtr<Polygon> polygon2XPtr) {
+    
+    Polygon polygon2             = *(polygon2XPtr.get());
+    Polygon2WithHoles polygonwh2 = polygonToPolygon2WithHoles(polygon2); 
+    
+    Polygon2WithHoles msum = 
+      CGAL::minkowski_sum_by_reduced_convolution_2(polygonwh, polygonwh2);
+    
+    return returnPolygonWithHoles(msum);
+  }
   
   
   // ------------------------------------------------------------------------ //

@@ -23,6 +23,7 @@ RCPP_MODULE(class_CGALpolygonWithHoles) {
     .method("convexPartsT", &CGALpolygonWithHoles::convexPartsT)
     .method("convexPartsV", &CGALpolygonWithHoles::convexPartsV)
     .method("minkowskiC", &CGALpolygonWithHoles::minkowskiC)
+    .method("minkowskiC2", &CGALpolygonWithHoles::minkowskiC2)
     .method("minkowskiO", &CGALpolygonWithHoles::minkowskiO)
     .method("minkowskiT", &CGALpolygonWithHoles::minkowskiT)
     .method("minkowskiV", &CGALpolygonWithHoles::minkowskiV)
