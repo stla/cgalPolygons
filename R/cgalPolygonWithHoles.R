@@ -239,6 +239,7 @@ cgalPolygonWithHoles <- R6Class(
     #' @param ... arguments passed to \code{\link[graphics]{polygon}} for the 
     #'   holes
     #' @param new Boolean, whether to create a new plot
+    #' @param outerfirst Boolean, whether to print the outer polygon first
     #' @return No returned value, called for side-effect.
     #' @importFrom graphics plot polygon
     #' @examples 
@@ -249,20 +250,31 @@ cgalPolygonWithHoles <- R6Class(
     #' pwh$plot(
     #'   outerpars = list(lwd = 2), density = 10
     #' )
-    "plot" = function(outerpars = list(), ..., new = TRUE) {
+    "plot" = function(outerpars = list(), ..., new = TRUE, outerfirst = TRUE) {
       stopifnot(isBoolean(new))
       if(new) {
         bbox <- private[[".CGALpolygonWithHoles"]]$boundingBox()
         plot(bbox, type = "n", asp = 1, xlab = NA, ylab = NA, axes = FALSE)
       }
-      do.call(function(...) {
-        polygon(private[[".vs_outer"]], ...)
-      }, outerpars)
-      invisible(
-        lapply(private[[".vs_holes"]], function(hole) {
-          polygon(hole, ...) 
-        })
-      )
+      if(outerfirst) {
+        do.call(function(...) {
+          polygon(private[[".vs_outer"]], ...)
+        }, outerpars)
+        invisible(
+          lapply(private[[".vs_holes"]], function(hole) {
+            polygon(hole, ...) 
+          })
+        )
+      } else {
+        invisible(
+          lapply(private[[".vs_holes"]], function(hole) {
+            polygon(hole, ...) 
+          })
+        )
+        do.call(function(...) {
+          polygon(private[[".vs_outer"]], ...)
+        }, outerpars)
+      }
       invisible(NULL)
     },
     

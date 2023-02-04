@@ -51,6 +51,10 @@ R6 based utilities for polygons.
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/boolop_symdiff.png)
 
+- *An example with some holes:*
+
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/boolop_withHoles.png)
+
 
 ## License
 

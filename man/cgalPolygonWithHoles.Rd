@@ -438,7 +438,12 @@ minko$plot(lwd = 2, col = "limegreen")
 \subsection{Method \code{plot()}}{
 Plot the polygon with holes.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$plot(outerpars = list(), ..., new = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$plot(
+  outerpars = list(),
+  ...,
+  new = TRUE,
+  outerfirst = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -451,6 +456,8 @@ Plot the polygon with holes.
 holes}
 
 \item{\code{new}}{Boolean, whether to create a new plot}
+
+\item{\code{outerfirst}}{Boolean, whether to print the outer polygon first}
 }
 \if{html}{\out{</div>}}
 }
