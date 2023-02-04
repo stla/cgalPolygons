@@ -127,6 +127,17 @@ cgalPolygonWithHoles <- R6Class(
       }
     },
     
+    #' @description Get the vertices of the polygon.
+    #' @return A named list with two fields: \code{"outer"}, the vertices of 
+    #'   the outer polygon in a matrix, and \code{"holes"}, the vertices of 
+    #'   the holes in a list of matrices.
+    "getVertices" = function() {
+      list(
+        "outer" = private[[".vs_outer"]],
+        "holes" = private[[".vs_holes"]]
+      )
+    },
+    
 
     #' @description Minkowski sum of the polygon and another polygon.
     #' @param pwh2 a \code{cgalPolygonWithHoles} object, the polygon to add 

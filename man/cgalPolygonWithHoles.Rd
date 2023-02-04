@@ -83,6 +83,7 @@ pwh$plot(
 \item \href{#method-cgalPolygonWithHoles-area}{\code{cgalPolygonWithHoles$area()}}
 \item \href{#method-cgalPolygonWithHoles-boundingBox}{\code{cgalPolygonWithHoles$boundingBox()}}
 \item \href{#method-cgalPolygonWithHoles-convexParts}{\code{cgalPolygonWithHoles$convexParts()}}
+\item \href{#method-cgalPolygonWithHoles-getVertices}{\code{cgalPolygonWithHoles$getVertices()}}
 \item \href{#method-cgalPolygonWithHoles-minkowskiSum}{\code{cgalPolygonWithHoles$minkowskiSum()}}
 \item \href{#method-cgalPolygonWithHoles-plot}{\code{cgalPolygonWithHoles$plot()}}
 \item \href{#method-cgalPolygonWithHoles-print}{\code{cgalPolygonWithHoles$print()}}
@@ -216,6 +217,21 @@ invisible(
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-getVertices"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-getVertices}{}}}
+\subsection{Method \code{getVertices()}}{
+Get the vertices of the polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$getVertices()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+A named list with two fields: \code{"outer"}, the vertices of 
+  the outer polygon in a matrix, and \code{"holes"}, the vertices of 
+  the holes in a list of matrices.
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-cgalPolygonWithHoles-minkowskiSum"></a>}}
 \if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-minkowskiSum}{}}}
 \subsection{Method \code{minkowskiSum()}}{
@@ -259,7 +275,7 @@ minko$plot(lwd = 2, col = "limegreen")
 \subsection{Method \code{plot()}}{
 Plot the polygon with holes.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$plot(outerpars = list(), ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$plot(outerpars = list(), ..., new = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -270,6 +286,8 @@ Plot the polygon with holes.
 
 \item{\code{...}}{arguments passed to \code{\link[graphics]{polygon}} for the 
 holes}
+
+\item{\code{new}}{Boolean, whether to create a new plot}
 }
 \if{html}{\out{</div>}}
 }
