@@ -102,6 +102,87 @@ pwh <- cgalPolygonWithHoles$new(
 pwh$plot(
   outerpars = list(lwd = 2), density = 10
 )
+
+## ------------------------------------------------
+## Method `cgalPolygonWithHoles$subtract`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# difference
+plgList <- plg1$subtract(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+
+## ------------------------------------------------
+## Method `cgalPolygonWithHoles$symdiff`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# symmetric difference
+plgList <- plg1$symdiff(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+
+## ------------------------------------------------
+## Method `cgalPolygonWithHoles$union`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# union
+plgList <- plg1$union(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -115,6 +196,9 @@ pwh$plot(
 \item \href{#method-cgalPolygonWithHoles-minkowskiSum}{\code{cgalPolygonWithHoles$minkowskiSum()}}
 \item \href{#method-cgalPolygonWithHoles-plot}{\code{cgalPolygonWithHoles$plot()}}
 \item \href{#method-cgalPolygonWithHoles-print}{\code{cgalPolygonWithHoles$print()}}
+\item \href{#method-cgalPolygonWithHoles-subtract}{\code{cgalPolygonWithHoles$subtract()}}
+\item \href{#method-cgalPolygonWithHoles-symdiff}{\code{cgalPolygonWithHoles$symdiff()}}
+\item \href{#method-cgalPolygonWithHoles-union}{\code{cgalPolygonWithHoles$union()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -406,5 +490,155 @@ Print the \code{cgalPolygonWithHoles} object.
 \subsection{Returns}{
 No value, just prints some information about the polygon.
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-subtract"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-subtract}{}}}
+\subsection{Method \code{subtract()}}{
+Difference between the polygon and another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$subtract(pwh2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# difference
+plgList <- plg1$subtract(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-symdiff"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-symdiff}{}}}
+\subsection{Method \code{symdiff()}}{
+Symmetric difference of the polygon and another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$symdiff(pwh2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# symmetric difference
+plgList <- plg1$symdiff(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-union"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-union}{}}}
+\subsection{Method \code{union()}}{
+Union of the polygon with another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$union(pwh2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# union
+plgList <- plg1$union(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(list(lwd = 2), new = FALSE)
+plg2$plot(list(lwd = 2), new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 }
