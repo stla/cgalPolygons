@@ -21,10 +21,16 @@ typedef CGAL::Small_side_angle_bisector_decomposition_2<EK> SSABD;
 
 // -------------------------------------------------------------------------- //
 void Message(const std::string&);
+
 Polygon makePolygon(const Rcpp::NumericMatrix&);
+
 Polygon2WithHoles makePolygonWithHoles(
   const Rcpp::NumericMatrix&, const Rcpp::List&
 );
+
 template <typename PolygonT>
 Rcpp::NumericMatrix getVertices(const PolygonT&);
+
 void checkPWH(const Polygon2WithHoles&);
+
+Rcpp::List returnPolygonWithHoles(const Polygon2WithHoles&);

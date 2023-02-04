@@ -125,21 +125,7 @@ public:
     Polygon2WithHoles msum = 
       CGAL::minkowski_sum_by_reduced_convolution_2(polygonwh, polygonwh2);
     
-    Polygon2 outer = msum.outer_boundary();
-    Rcpp::NumericMatrix Outer = getVertices<Polygon2>(outer);
-    
-    int nholes = msum.number_of_holes();
-    Rcpp::List Holes(nholes);
-    int h = 0;
-    for(auto hit = msum.holes_begin(); hit != msum.holes_end(); ++hit) {
-      Polygon2 hole = *hit;
-      Holes(h++) = getVertices<Polygon2>(hole);
-    }
-
-    return Rcpp::List::create(
-      Rcpp::Named("outer") = Outer,
-      Rcpp::Named("holes") = Holes
-    );
+    return returnPolygonWithHoles(msum);
   }
   
   
@@ -155,21 +141,7 @@ public:
       polygonwh, polygonwh2, decomp_no_hole, decomp_with_holes
     );
     
-    Polygon2 outer = msum.outer_boundary();
-    Rcpp::NumericMatrix Outer = getVertices<Polygon2>(outer);
-    
-    int nholes = msum.number_of_holes();
-    Rcpp::List Holes(nholes);
-    int h = 0;
-    for(auto hit = msum.holes_begin(); hit != msum.holes_end(); ++hit) {
-      Polygon2 hole = *hit;
-      Holes(h++) = getVertices<Polygon2>(hole);
-    }
-    
-    return Rcpp::List::create(
-      Rcpp::Named("outer") = Outer,
-      Rcpp::Named("holes") = Holes
-    );
+    return returnPolygonWithHoles(msum);
   }
   
   
@@ -183,21 +155,7 @@ public:
     Polygon2WithHoles msum = 
       CGAL::minkowski_sum_2(polygonwh, polygonwh2, decomposition);
     
-    Polygon2 outer = msum.outer_boundary();
-    Rcpp::NumericMatrix Outer = getVertices<Polygon2>(outer);
-    
-    int nholes = msum.number_of_holes();
-    Rcpp::List Holes(nholes);
-    int h = 0;
-    for(auto hit = msum.holes_begin(); hit != msum.holes_end(); ++hit) {
-      Polygon2 hole = *hit;
-      Holes(h++) = getVertices<Polygon2>(hole);
-    }
-    
-    return Rcpp::List::create(
-      Rcpp::Named("outer") = Outer,
-      Rcpp::Named("holes") = Holes
-    );
+    return returnPolygonWithHoles(msum);
   }
   
   
@@ -211,21 +169,7 @@ public:
     Polygon2WithHoles msum = 
       CGAL::minkowski_sum_2(polygonwh, polygonwh2, decomposition);
     
-    Polygon2 outer = msum.outer_boundary();
-    Rcpp::NumericMatrix Outer = getVertices<Polygon2>(outer);
-    
-    int nholes = msum.number_of_holes();
-    Rcpp::List Holes(nholes);
-    int h = 0;
-    for(auto hit = msum.holes_begin(); hit != msum.holes_end(); ++hit) {
-      Polygon2 hole = *hit;
-      Holes(h++) = getVertices<Polygon2>(hole);
-    }
-    
-    return Rcpp::List::create(
-      Rcpp::Named("outer") = Outer,
-      Rcpp::Named("holes") = Holes
-    );
+    return returnPolygonWithHoles(msum);
   }
   
   

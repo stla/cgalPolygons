@@ -121,3 +121,23 @@ void checkPWH(const Polygon2WithHoles& polygonwh) {
 }
 
 
+// -------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------- //
+Rcpp::List returnPolygonWithHoles(const Polygon2WithHoles& polygonwh) {
+  
+  Polygon2 outer = polygonwh.outer_boundary();
+  Rcpp::NumericMatrix Outer = getVertices<Polygon2>(outer);
+  
+  int nholes = polygonwh.number_of_holes();
+  Rcpp::List Holes(nholes);
+  int h = 0;
+  for(auto hit = polygonwh.holes_begin(); hit != polygonwh.holes_end(); ++hit) {
+    Polygon2 hole = *hit;
+    Holes(h++) = getVertices<Polygon2>(hole);
+  }
+  
+  return Rcpp::List::create(
+    Rcpp::Named("outer") = Outer,
+    Rcpp::Named("holes") = Holes
+  );
+}
