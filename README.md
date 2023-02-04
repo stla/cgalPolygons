@@ -39,6 +39,19 @@ R6 based utilities for polygons.
 
 ![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/boolop_intersection.png)
 
+- *Union:*
+
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/boolop_union.png)
+
+- *Difference:*
+
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/boolop_difference.png)
+
+- *Symmetric difference:*
+
+![](https://raw.githubusercontent.com/stla/cgalPolygons/main/inst/screenshots/boolop_symdiff.png)
+
+
 ## License
 
 This package is provided under the GPL-3 license but it uses the C++ library 
