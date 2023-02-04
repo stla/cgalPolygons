@@ -67,6 +67,46 @@ class CGALpolygon {
   
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_intersection(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon2WithHoles polygonwh = polygonToPolygon2WithHoles(polygon);
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Intersection(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_subtract(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon2WithHoles polygonwh = polygonToPolygon2WithHoles(polygon);
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Subtract(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_symdiff(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon2WithHoles polygonwh = polygonToPolygon2WithHoles(polygon);
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Symdiff(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_union(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon2WithHoles polygonwh = polygonToPolygon2WithHoles(polygon);
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Union(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
   Rcpp::NumericMatrix boundingBox() {
     CGAL::Bbox_2 bbox = polygon.bbox();
     Rcpp::NumericVector minCorner = {bbox.xmin(), bbox.ymin()};

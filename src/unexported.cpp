@@ -177,7 +177,10 @@ Rcpp::List returnPolygonWithHoles(const Polygon2WithHoles& polygonwh) {
 
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
-Polygon2WithHoles polygonToPolygon2WithHoles(const Polygon& polygon) {
+Polygon2WithHoles polygonToPolygon2WithHoles(Polygon& polygon) {
+  if(!polygon.is_counterclockwise_oriented()) {
+    polygon.reverse_orientation();
+  }
   Polygon2 outer;
   for(
     Polygon::Vertex_iterator vi = polygon.vertices_begin(); 
