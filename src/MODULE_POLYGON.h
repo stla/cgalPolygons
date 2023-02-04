@@ -87,6 +87,15 @@ class CGALpolygon {
   
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_subtract2(Rcpp::XPtr<Polygon2WithHoles> plg2XPtr) {
+    Polygon2WithHoles polygonwh = polygonToPolygon2WithHoles(polygon);
+    Polygon2WithHoles pwh2 = *(plg2XPtr.get());
+    return Subtract(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
   Rcpp::List boolop_symdiff(Rcpp::XPtr<Polygon> plg2XPtr) {
     Polygon2WithHoles polygonwh = polygonToPolygon2WithHoles(polygon);
     Polygon plg2 = *(plg2XPtr.get());

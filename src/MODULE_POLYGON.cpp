@@ -14,6 +14,7 @@ RCPP_MODULE(class_CGALpolygon) {
     .method("area", &CGALpolygon::area)
     .method("boolop_intersection", &CGALpolygon::boolop_intersection)
     .method("boolop_subtract", &CGALpolygon::boolop_subtract)
+    .method("boolop_subtract2", &CGALpolygon::boolop_subtract2)
     .method("boolop_symdiff", &CGALpolygon::boolop_symdiff)
     .method("boolop_union", &CGALpolygon::boolop_union)
     .method("boundingBox", &CGALpolygon::boundingBox)

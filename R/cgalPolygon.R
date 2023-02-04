@@ -281,11 +281,13 @@ cgalPolygon <- R6Class(
     #' par(opar)
     "subtract" = function(plg2) {
       stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
-      if(isCGALpolygonWithHoles(plg2)) {
-        return(plg2$subtract(self))
+      if(isCGALpolygon(plg2)) {
+        xptr2 <- getXPtr(plg2)
+        plgs <- private[[".CGALpolygon"]]$boolop_subtract(xptr2)
+      } else {
+        xptr2 <- getXPtr2(plg2)
+        plgs <- private[[".CGALpolygon"]]$boolop_subtract2(xptr2)
       }
-      xptr2 <- getXPtr(plg2)
-      plgs <- private[[".CGALpolygon"]]$boolop_subtract(xptr2)
       # output
       out <- vector("list", length = length(plgs))
       for(i in seq_along(plgs)) {
