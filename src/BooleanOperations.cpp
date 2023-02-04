@@ -8,8 +8,13 @@
 Rcpp::List Intersection(
   const Polygon2WithHoles& plg1, const Polygon2WithHoles& plg2 
 ) {
-  checkPWH(plg1);
-  checkPWH(plg2);
+  Traits2 traits;
+  if(!CGAL::is_valid_polygon_with_holes(plg1, traits)){
+    Rcpp::stop("Invalid polygon with holes.");
+  }
+  if(!CGAL::is_valid_polygon_with_holes(plg2, traits)){
+    Rcpp::stop("Invalid polygon with holes.");
+  }
   std::vector<Polygon2WithHoles> Plgs;
   CGAL::intersection(plg1, plg2, std::back_inserter(Plgs));
   int npgns = std::distance(Plgs.begin(), Plgs.end());
