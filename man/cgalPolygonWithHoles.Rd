@@ -64,21 +64,25 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # intersection
 plgList <- plg1$intersection(plg2)
-plg <- plgList[[1L]]
+plg <- plgList[[1]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
 plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.6, 1.6), asp = 1, 
   xlab = NA, ylab = NA, axes = FALSE
 )
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plg1$plot(list(lwd = 2), lwd = 2, density = 10, new = FALSE)
+plg2$plot(list(lwd = 2), lwd = 2, density = 10, new = FALSE)
+plg$plot(lwd = 4, col = "red", new = FALSE)
 par(opar)
 
 ## ------------------------------------------------
@@ -113,21 +117,23 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # difference
 plgList <- plg1$subtract(plg2)
-plg <- plgList[[1L]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
 plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.6, 1.6), asp = 1, 
   xlab = NA, ylab = NA, axes = FALSE
 )
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plgList[[1]]$plot(lwd = 4, col = "red", new = FALSE)
+plgList[[2]]$plot(lwd = 4, col = "red", new = FALSE)
 par(opar)
 
 ## ------------------------------------------------
@@ -140,21 +146,19 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # symmetric difference
 plgList <- plg1$symdiff(plg2)
 plg <- plgList[[1L]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
-plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
-  xlab = NA, ylab = NA, axes = FALSE
-)
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plg$plot(list(lwd = 4, col = "red"), lwd = 4, col = "white")
 par(opar)
 
 ## ------------------------------------------------
@@ -167,21 +171,19 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # union
 plgList <- plg1$union(plg2)
-plg <- plgList[[1L]]
+plg <- plgList[[1]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
-plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
-  xlab = NA, ylab = NA, axes = FALSE
-)
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plg$plot(list(lwd = 4, col = "red"), lwd = 4, col = "white")
 par(opar)
 }
 \section{Methods}{
@@ -372,21 +374,25 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # intersection
 plgList <- plg1$intersection(plg2)
-plg <- plgList[[1L]]
+plg <- plgList[[1]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
 plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.6, 1.6), asp = 1, 
   xlab = NA, ylab = NA, axes = FALSE
 )
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plg1$plot(list(lwd = 2), lwd = 2, density = 10, new = FALSE)
+plg2$plot(list(lwd = 2), lwd = 2, density = 10, new = FALSE)
+plg$plot(lwd = 4, col = "red", new = FALSE)
 par(opar)
 }
 \if{html}{\out{</div>}}
@@ -528,21 +534,23 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # difference
 plgList <- plg1$subtract(plg2)
-plg <- plgList[[1L]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
 plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.6, 1.6), asp = 1, 
   xlab = NA, ylab = NA, axes = FALSE
 )
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plgList[[1]]$plot(lwd = 4, col = "red", new = FALSE)
+plgList[[2]]$plot(lwd = 4, col = "red", new = FALSE)
 par(opar)
 }
 \if{html}{\out{</div>}}
@@ -579,21 +587,19 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # symmetric difference
 plgList <- plg1$symdiff(plg2)
 plg <- plgList[[1L]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
-plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
-  xlab = NA, ylab = NA, axes = FALSE
-)
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plg$plot(list(lwd = 4, col = "red"), lwd = 4, col = "white")
 par(opar)
 }
 \if{html}{\out{</div>}}
@@ -630,21 +636,19 @@ circle <- function(x, y, r) {
   t <- seq(0, 2, length.out = 100)[-1L]
   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
 }
-# take two circles
-plg1 <- cgalPolygonWithHoles$new(circle(-1, 0, 1.25))
-plg2 <- cgalPolygonWithHoles$new(circle(1, 0, 1.25))
+# take two circles with a hole
+plg1 <- cgalPolygonWithHoles$new(
+  circle(-1, 0, 1.5), holes = list(circle(-1, 0, 0.8))
+)
+plg2 <- cgalPolygonWithHoles$new(
+  circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
+)
 # union
 plgList <- plg1$union(plg2)
-plg <- plgList[[1L]]
+plg <- plgList[[1]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
-plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
-  xlab = NA, ylab = NA, axes = FALSE
-)
-plg1$plot(list(lwd = 2), new = FALSE)
-plg2$plot(list(lwd = 2), new = FALSE)
-plg$plot(lwd = 3, col = "red", new = FALSE)
+plg$plot(list(lwd = 4, col = "red"), lwd = 4, col = "white")
 par(opar)
 }
 \if{html}{\out{</div>}}

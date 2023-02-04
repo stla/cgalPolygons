@@ -12,16 +12,10 @@ plg2 <- cgalPolygonWithHoles$new(
   circle(1, 0, 1.5), holes = list(circle(1, 0, 0.8))
 )
 # intersection
-plgList <- plg1$intersection(plg2)
+plgList <- plg1$union(plg2)
 plg <- plgList[[1]]
 # plot
 opar <- par(mar = c(0, 0, 0, 0))
-plot(
-  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.6, 1.6), asp = 1, 
-  xlab = NA, ylab = NA, axes = FALSE
-)
-plg1$plot(list(lwd = 2), lwd = 2, density = 10, new = FALSE)
-plg2$plot(list(lwd = 2), lwd = 2, density = 10, new = FALSE)
-plg$plot(lwd = 4, col = "red", new = FALSE)
+plg$plot(list(lwd = 4, col = "red"), lwd = 4, col = "white")
 par(opar)
 
