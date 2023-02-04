@@ -251,6 +251,162 @@ cgalPolygon <- R6Class(
     },
     
     
+    #' @description Difference between the polygon and another polygon.
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object
+    #' @return A list whose each element is either a \code{cgalPolygon} object
+    #'   or a \code{cgalPolygonWithHoles} object.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' # function creating a circle
+    #' circle <- function(x, y, r) {
+    #'   t <- seq(0, 2, length.out = 100)[-1L]
+    #'   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+    #' }
+    #' # take two circles
+    #' plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+    #' plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+    #' # difference
+    #' plgList <- plg1$subtract(plg2)
+    #' plg <- plgList[[1L]]
+    #' # plot
+    #' opar <- par(mar = c(0, 0, 0, 0))
+    #' plot(
+    #'   NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+    #'   xlab = NA, ylab = NA, axes = FALSE
+    #' )
+    #' plg1$plot(lwd = 2, new = FALSE)
+    #' plg2$plot(lwd = 2, new = FALSE)
+    #' plg$plot(lwd = 3, col = "red", new = FALSE)
+    #' par(opar)
+    "subtract" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygonWithHoles(plg2)) {
+        return(plg2$subtract(self))
+      }
+      xptr2 <- getXPtr(plg2)
+      plgs <- private[[".CGALpolygon"]]$boolop_subtract(xptr2)
+      # output
+      out <- vector("list", length = length(plgs))
+      for(i in seq_along(plgs)) {
+        plg   <- plgs[[i]]
+        holes <- plg[["holes"]]
+        if(length(holes) == 0L) {
+          out[[i]] <- cgalPolygon$new(vertices = plg[["outer"]])
+        } else {
+          out[[i]] <- cgalPolygonWithHoles$new(
+            outerVertices = plg[["outer"]], holes = holes
+          )
+        }
+      }
+      out
+    },
+    
+    
+    #' @description Symmetric difference of the polygon and another polygon.
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object
+    #' @return A list whose each element is either a \code{cgalPolygon} object
+    #'   or a \code{cgalPolygonWithHoles} object.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' # function creating a circle
+    #' circle <- function(x, y, r) {
+    #'   t <- seq(0, 2, length.out = 100)[-1L]
+    #'   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+    #' }
+    #' # take two circles
+    #' plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+    #' plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+    #' # symmetric difference
+    #' plgList <- plg1$symdiff(plg2)
+    #' plg <- plgList[[1L]]
+    #' # plot
+    #' opar <- par(mar = c(0, 0, 0, 0))
+    #' plot(
+    #'   NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+    #'   xlab = NA, ylab = NA, axes = FALSE
+    #' )
+    #' plg1$plot(lwd = 2, new = FALSE)
+    #' plg2$plot(lwd = 2, new = FALSE)
+    #' plg$plot(list(lwd = 3, col = "red"), col = "white", new = FALSE)
+    #' par(opar)
+    "symdiff" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygonWithHoles(plg2)) {
+        return(plg2$symdiff(self))
+      }
+      xptr2 <- getXPtr(plg2)
+      plgs <- private[[".CGALpolygon"]]$boolop_symdiff(xptr2)
+      # output
+      out <- vector("list", length = length(plgs))
+      for(i in seq_along(plgs)) {
+        plg   <- plgs[[i]]
+        holes <- plg[["holes"]]
+        if(length(holes) == 0L) {
+          out[[i]] <- cgalPolygon$new(vertices = plg[["outer"]])
+        } else {
+          out[[i]] <- cgalPolygonWithHoles$new(
+            outerVertices = plg[["outer"]], holes = holes
+          )
+        }
+      }
+      out
+    },
+    
+    
+    #' @description Union of the polygon with another polygon.
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object
+    #' @return A list whose each element is either a \code{cgalPolygon} object
+    #'   or a \code{cgalPolygonWithHoles} object.
+    #' @examples 
+    #' library(cgalPolygons)
+    #' # function creating a circle
+    #' circle <- function(x, y, r) {
+    #'   t <- seq(0, 2, length.out = 100)[-1L]
+    #'   t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+    #' }
+    #' # take two circles
+    #' plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+    #' plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+    #' # union
+    #' plgList <- plg1$union(plg2)
+    #' plg <- plgList[[1L]]
+    #' # plot
+    #' opar <- par(mar = c(0, 0, 0, 0))
+    #' plot(
+    #'   NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+    #'   xlab = NA, ylab = NA, axes = FALSE
+    #' )
+    #' plg1$plot(lwd = 2, new = FALSE)
+    #' plg2$plot(lwd = 2, new = FALSE)
+    #' plg$plot(lwd = 3, col = "red", new = FALSE)
+    #' par(opar)
+    "union" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygonWithHoles(plg2)) {
+        return(plg2$union(self))
+      }
+      xptr2 <- getXPtr(plg2)
+      plgs <- private[[".CGALpolygon"]]$boolop_union(xptr2)
+      # output
+      out <- vector("list", length = length(plgs))
+      for(i in seq_along(plgs)) {
+        plg   <- plgs[[i]]
+        holes <- plg[["holes"]]
+        if(length(holes) == 0L) {
+          out[[i]] <- cgalPolygon$new(vertices = plg[["outer"]])
+        } else {
+          out[[i]] <- cgalPolygonWithHoles$new(
+            outerVertices = plg[["outer"]], holes = holes
+          )
+        }
+      }
+      out
+    },
+    
+    
     #' @description Locate point(s) with respect to the polygon. The polygon 
     #'   must be simple.
     #' @param points a numeric matrix with two columns, or a numeric vector 

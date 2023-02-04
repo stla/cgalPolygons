@@ -134,6 +134,87 @@ ptg$reverseOrientation()
 ptg$isCCWO()
 
 ## ------------------------------------------------
+## Method `cgalPolygon$subtract`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# difference
+plgList <- plg1$subtract(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+
+## ------------------------------------------------
+## Method `cgalPolygon$symdiff`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# symmetric difference
+plgList <- plg1$symdiff(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(list(lwd = 3, col = "red"), col = "white", new = FALSE)
+par(opar)
+
+## ------------------------------------------------
+## Method `cgalPolygon$union`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# union
+plgList <- plg1$union(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+
+## ------------------------------------------------
 ## Method `cgalPolygon$whereIs`
 ## ------------------------------------------------
 
@@ -159,6 +240,9 @@ ptg$whereIs(rbind(pt1, pt2))
 \item \href{#method-cgalPolygon-isSimple}{\code{cgalPolygon$isSimple()}}
 \item \href{#method-cgalPolygon-plot}{\code{cgalPolygon$plot()}}
 \item \href{#method-cgalPolygon-reverseOrientation}{\code{cgalPolygon$reverseOrientation()}}
+\item \href{#method-cgalPolygon-subtract}{\code{cgalPolygon$subtract()}}
+\item \href{#method-cgalPolygon-symdiff}{\code{cgalPolygon$symdiff()}}
+\item \href{#method-cgalPolygon-union}{\code{cgalPolygon$union()}}
 \item \href{#method-cgalPolygon-whereIs}{\code{cgalPolygon$whereIs()}}
 }
 }
@@ -520,6 +604,159 @@ ptg <- cgalPolygon$new(pentagram)
 ptg$isCCWO()
 ptg$reverseOrientation()
 ptg$isCCWO()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-subtract"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-subtract}{}}}
+\subsection{Method \code{subtract()}}{
+Difference between the polygon and another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$subtract(plg2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# difference
+plgList <- plg1$subtract(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-symdiff"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-symdiff}{}}}
+\subsection{Method \code{symdiff()}}{
+Symmetric difference of the polygon and another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$symdiff(plg2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# symmetric difference
+plgList <- plg1$symdiff(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(list(lwd = 3, col = "red"), col = "white", new = FALSE)
+par(opar)
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-union"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-union}{}}}
+\subsection{Method \code{union()}}{
+Union of the polygon with another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$union(plg2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# union
+plgList <- plg1$union(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
 }
 \if{html}{\out{</div>}}
 
