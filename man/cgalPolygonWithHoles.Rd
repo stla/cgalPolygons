@@ -84,6 +84,7 @@ pwh$plot(
 \item \href{#method-cgalPolygonWithHoles-boundingBox}{\code{cgalPolygonWithHoles$boundingBox()}}
 \item \href{#method-cgalPolygonWithHoles-convexParts}{\code{cgalPolygonWithHoles$convexParts()}}
 \item \href{#method-cgalPolygonWithHoles-getVertices}{\code{cgalPolygonWithHoles$getVertices()}}
+\item \href{#method-cgalPolygonWithHoles-intersection}{\code{cgalPolygonWithHoles$intersection()}}
 \item \href{#method-cgalPolygonWithHoles-minkowskiSum}{\code{cgalPolygonWithHoles$minkowskiSum()}}
 \item \href{#method-cgalPolygonWithHoles-plot}{\code{cgalPolygonWithHoles$plot()}}
 \item \href{#method-cgalPolygonWithHoles-print}{\code{cgalPolygonWithHoles$print()}}
@@ -229,6 +230,27 @@ Get the vertices of the polygon.
 A named list with two fields: \code{"outer"}, the vertices of 
   the outer polygon in a matrix, and \code{"holes"}, the vertices of 
   the holes in a list of matrices.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygonWithHoles-intersection"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygonWithHoles-intersection}{}}}
+\subsection{Method \code{intersection()}}{
+Intersection of the polygon with another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$intersection(pwh2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
 }
 }
 \if{html}{\out{<hr>}}

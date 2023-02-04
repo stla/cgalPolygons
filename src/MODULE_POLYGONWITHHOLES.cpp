@@ -11,6 +11,7 @@ RCPP_MODULE(class_CGALpolygonWithHoles) {
     .constructor<XPtr<Polygon2WithHoles>>()
     .field("xptr", &CGALpolygonWithHoles::xptr)
     .method("area", &CGALpolygonWithHoles::area)
+    .method("boolop_intersection", &CGALpolygonWithHoles::boolop_intersection)
     .method("boundingBox", &CGALpolygonWithHoles::boundingBox)
     .method("convexPartsT", &CGALpolygonWithHoles::convexPartsT)
     .method("convexPartsV", &CGALpolygonWithHoles::convexPartsV)

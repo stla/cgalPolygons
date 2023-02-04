@@ -12,24 +12,11 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// Intersection
-Rcpp::List Intersection(Rcpp::XPtr<Polygon2WithHoles> xptr1, Rcpp::XPtr<Polygon2WithHoles> xptr2);
-RcppExport SEXP _cgalPolygons_Intersection(SEXP xptr1SEXP, SEXP xptr2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<Polygon2WithHoles> >::type xptr1(xptr1SEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<Polygon2WithHoles> >::type xptr2(xptr2SEXP);
-    rcpp_result_gen = Rcpp::wrap(Intersection(xptr1, xptr2));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 RcppExport SEXP _rcpp_module_boot_class_CGALpolygon();
 RcppExport SEXP _rcpp_module_boot_class_CGALpolygonWithHoles();
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_cgalPolygons_Intersection", (DL_FUNC) &_cgalPolygons_Intersection, 2},
     {"_rcpp_module_boot_class_CGALpolygon", (DL_FUNC) &_rcpp_module_boot_class_CGALpolygon, 0},
     {"_rcpp_module_boot_class_CGALpolygonWithHoles", (DL_FUNC) &_rcpp_module_boot_class_CGALpolygonWithHoles, 0},
     {NULL, NULL, 0}

@@ -34,3 +34,6 @@ Rcpp::NumericMatrix getVertices(const PolygonT&);
 void checkPWH(const Polygon2WithHoles&);
 
 Rcpp::List returnPolygonWithHoles(const Polygon2WithHoles&);
+
+Rcpp::List Intersection(const Polygon2WithHoles&, const Polygon2WithHoles&);
+

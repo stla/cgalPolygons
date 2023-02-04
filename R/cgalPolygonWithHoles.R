@@ -138,7 +138,31 @@ cgalPolygonWithHoles <- R6Class(
       )
     },
     
-
+    #' @description Intersection of the polygon with another polygon.
+    #' @param pwh2 a \code{cgalPolygonWithHoles} object
+    #' @return A list whose each element is either a \code{cgalPolygon} object
+    #'   or a \code{cgalPolygonWithHoles} object.
+    "intersection" = function(pwh2) {
+      stopifnot(isCGALpolygonWithHoles(pwh2))
+      xptr2 <- getXPtr2(pwh2)
+      plgs <- private[[".CGALpolygonWithHoles"]]$boolop_intersection(xptr2)
+      # output
+      out <- vector("list", length = length(plgs))
+      for(i in seq_along(plgs)) {
+        plg   <- plgs[[i]]
+        holes <- plg[["holes"]]
+        if(length(holes) == 0L) {
+          out[[i]] <- cgalPolygon$new(vertices = plg[["outer"]])
+        } else {
+          out[[i]] <- cgalPolygonWithHoles$new(
+            outerVertices = plg[["outer"]], holes = holes
+          )
+        }
+      }
+      out
+    },
+    
+    
     #' @description Minkowski sum of the polygon and another polygon.
     #' @param pwh2 a \code{cgalPolygonWithHoles} object, the polygon to add 
     #'   to the reference polygon
