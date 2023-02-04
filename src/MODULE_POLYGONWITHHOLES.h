@@ -47,7 +47,31 @@ public:
     Polygon2WithHoles plg2 = *(plg2XPtr.get());
     return Intersection(polygonwh, plg2);
   }
-    
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_subtract(Rcpp::XPtr<Polygon2WithHoles> plg2XPtr) {
+    Polygon2WithHoles plg2 = *(plg2XPtr.get());
+    return Subtract(polygonwh, plg2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_symdiff(Rcpp::XPtr<Polygon2WithHoles> plg2XPtr) {
+    Polygon2WithHoles plg2 = *(plg2XPtr.get());
+    return Symdiff(polygonwh, plg2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_union(Rcpp::XPtr<Polygon2WithHoles> plg2XPtr) {
+    Polygon2WithHoles plg2 = *(plg2XPtr.get());
+    return Union(polygonwh, plg2);
+  }
+  
     
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //

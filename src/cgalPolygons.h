@@ -36,4 +36,7 @@ void checkPWH(const Polygon2WithHoles&);
 Rcpp::List returnPolygonWithHoles(const Polygon2WithHoles&);
 
 Rcpp::List Intersection(const Polygon2WithHoles&, const Polygon2WithHoles&);
+Rcpp::List Subtract(const Polygon2WithHoles&, const Polygon2WithHoles&);
+Rcpp::List Symdiff(const Polygon2WithHoles&, const Polygon2WithHoles&);
+Rcpp::List Union(const Polygon2WithHoles&, const Polygon2WithHoles&);
 
