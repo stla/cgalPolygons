@@ -5,7 +5,7 @@
 #include "MODULE_POLYGON.h"
 
 RCPP_MODULE(class_CGALpolygon) {
-  using namespace Rcpp; 
+  using namespace Rcpp;
   class_<CGALpolygon>("CGALpolygon")
       .constructor<const NumericMatrix>()
       .constructor<XPtr<Polygon>, const bool>()

@@ -57,7 +57,7 @@ Polygon2WithHoles makePolygonWithHoles(
     if(!holes[h].is_simple()) {
       Rcpp::warning("Hole " + std::to_string(h+1) + " is not simple.");
     }
-    if(!holes[h].is_counterclockwise_oriented()) {
+    if(!holes[h].is_clockwise_oriented()) {
       holes[h].reverse_orientation();
     }
   }
@@ -93,17 +93,31 @@ template Rcpp::NumericMatrix getVertices<Polygon2>(const Polygon2&);
 // -------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------- //
 void checkPWH(const Polygon2WithHoles& polygonwh) {
+  
   Polygon2 outer = polygonwh.outer_boundary();
   if(!outer.is_simple()) {
     Rcpp::stop("The outer polygon is not simple.");
   }
+  
   int h = 1;
   for(auto hit = polygonwh.holes_begin(); hit != polygonwh.holes_end(); ++hit) {
     Polygon2 hole = *hit;
     if(!hole.is_simple()) {
       Rcpp::stop("Hole " + std::to_string(h) + " is not simple.");
     }
+    if(CGAL::do_intersect(outer, hole)) {
+      Rcpp::stop(
+        "The outer polygon and hole " + std::to_string(h) + 
+          " intersect each other."
+      );
+    }
     h++;
   }
+  
+  if(CGAL::do_intersect(polygonwh.holes_begin(), polygonwh.holes_end())) {
+    Rcpp::stop("Found two holes intersecting each other");
+  }
+  
 }
+
 

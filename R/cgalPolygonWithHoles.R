@@ -48,6 +48,10 @@ cgalPolygonWithHoles <- R6Class(
       stopifnot(ncol(outerVertices) == 2L)
       storage.mode(outerVertices) <- "double"
       stopifnot(noMissingValue(outerVertices))
+      if(anyDuplicated(outerVertices)) {
+        stop("Found duplicated vertices in the outer polygon.")
+      }
+      #
       stopifnot(is.list(holes))
       for(h in seq_along(holes)) {
         hole <- holes[[h]]
@@ -56,6 +60,11 @@ cgalPolygonWithHoles <- R6Class(
         stopifnot(ncol(hole) == 2L)
         storage.mode(hole) <- "double"
         stopifnot(noMissingValue(hole))
+        if(anyDuplicated(hole)) {
+          stop(sprintf(
+            "Found duplicated vertices in the hole %d.", h
+          ))
+        }
       }
       private[[".vs_outer"]] <- outerVertices
       private[[".vs_holes"]] <- holes
