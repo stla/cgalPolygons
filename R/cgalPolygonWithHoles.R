@@ -139,7 +139,8 @@ cgalPolygonWithHoles <- R6Class(
     },
     
     #' @description Intersection of the polygon with another polygon.
-    #' @param pwh2 a \code{cgalPolygonWithHoles} object
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object
     #' @return A list whose each element is either a \code{cgalPolygon} object
     #'   or a \code{cgalPolygonWithHoles} object.
     #' @examples 
@@ -165,10 +166,15 @@ cgalPolygonWithHoles <- R6Class(
     #' plg2$plot(list(lwd = 2), new = FALSE)
     #' plg$plot(lwd = 3, col = "red", new = FALSE)
     #' par(opar)
-    "intersection" = function(pwh2) {
-      stopifnot(isCGALpolygonWithHoles(pwh2))
-      xptr2 <- getXPtr2(pwh2)
-      plgs <- private[[".CGALpolygonWithHoles"]]$boolop_intersection(xptr2)
+    "intersection" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygon(plg2)) {
+        xptr2 <- getXPtr(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_intersection2(xptr2)
+      } else {
+        xptr2 <- getXPtr2(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_intersection(xptr2)
+      }
       # output
       out <- vector("list", length = length(plgs))
       for(i in seq_along(plgs)) {
@@ -187,7 +193,7 @@ cgalPolygonWithHoles <- R6Class(
     
     
     #' @description Minkowski sum of the polygon and another polygon.
-    #' @param pwh2 a \code{cgalPolygonWithHoles} object, the polygon to add 
+    #' @param plg2 a \code{cgalPolygonWithHoles} object, the polygon to add 
     #'   to the reference polygon
     #' @param method the method used: \code{"convolution"}, \code{"triangle"}, 
     #'   \code{"vertical"} or \code{"optimal"} (the method should not change 
@@ -200,12 +206,12 @@ cgalPolygonWithHoles <- R6Class(
     #' plg2 <- cgalPolygonWithHoles$new(star)
     #' minko <- plg1$minkowskiSum(plg2)
     #' minko$plot(lwd = 2, col = "limegreen")
-    "minkowskiSum" = function(pwh2, method = "convolution") {
-      stopifnot(isCGALpolygonWithHoles(pwh2))
+    "minkowskiSum" = function(plg2, method = "convolution") {
+      stopifnot(isCGALpolygonWithHoles(plg2))
       method <- match.arg(
         method, c("convolution", "triangle", "vertical", "optimal")
       )
-      xptr <- getXPtr2(pwh2)
+      xptr <- getXPtr2(plg2)
       if(method == "convolution") {
         msum <- private[[".CGALpolygonWithHoles"]]$minkowskiC(xptr)
       } else if(method == "triangle") {
@@ -270,7 +276,8 @@ cgalPolygonWithHoles <- R6Class(
  
     
     #' @description Difference between the polygon and another polygon.
-    #' @param pwh2 a \code{cgalPolygonWithHoles} object
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object
     #' @return A list whose each element is either a \code{cgalPolygon} object
     #'   or a \code{cgalPolygonWithHoles} object.
     #' @examples 
@@ -296,10 +303,15 @@ cgalPolygonWithHoles <- R6Class(
     #' plg2$plot(list(lwd = 2), new = FALSE)
     #' plg$plot(lwd = 3, col = "red", new = FALSE)
     #' par(opar)
-    "subtract" = function(pwh2) {
-      stopifnot(isCGALpolygonWithHoles(pwh2))
-      xptr2 <- getXPtr2(pwh2)
-      plgs <- private[[".CGALpolygonWithHoles"]]$boolop_subtract(xptr2)
+    "subtract" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygon(plg2)) {
+        xptr2 <- getXPtr(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_subtract2(xptr2)
+      } else {
+        xptr2 <- getXPtr2(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_subtract(xptr2)
+      }
       # output
       out <- vector("list", length = length(plgs))
       for(i in seq_along(plgs)) {
@@ -318,7 +330,8 @@ cgalPolygonWithHoles <- R6Class(
     
     
     #' @description Symmetric difference of the polygon and another polygon.
-    #' @param pwh2 a \code{cgalPolygonWithHoles} object
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object
     #' @return A list whose each element is either a \code{cgalPolygon} object
     #'   or a \code{cgalPolygonWithHoles} object.
     #' @examples 
@@ -344,10 +357,15 @@ cgalPolygonWithHoles <- R6Class(
     #' plg2$plot(list(lwd = 2), new = FALSE)
     #' plg$plot(lwd = 3, col = "red", new = FALSE)
     #' par(opar)
-    "symdiff" = function(pwh2) {
-      stopifnot(isCGALpolygonWithHoles(pwh2))
-      xptr2 <- getXPtr2(pwh2)
-      plgs <- private[[".CGALpolygonWithHoles"]]$boolop_symdiff(xptr2)
+    "symdiff" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygon(plg2)) {
+        xptr2 <- getXPtr(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_symdiff2(xptr2)
+      } else {
+        xptr2 <- getXPtr2(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_symdiff(xptr2)
+      }
       # output
       out <- vector("list", length = length(plgs))
       for(i in seq_along(plgs)) {
@@ -366,7 +384,8 @@ cgalPolygonWithHoles <- R6Class(
     
     
     #' @description Union of the polygon with another polygon.
-    #' @param pwh2 a \code{cgalPolygonWithHoles} object
+    #' @param plg2 a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+    #'   object
     #' @return A list whose each element is either a \code{cgalPolygon} object
     #'   or a \code{cgalPolygonWithHoles} object.
     #' @examples 
@@ -392,10 +411,15 @@ cgalPolygonWithHoles <- R6Class(
     #' plg2$plot(list(lwd = 2), new = FALSE)
     #' plg$plot(lwd = 3, col = "red", new = FALSE)
     #' par(opar)
-    "union" = function(pwh2) {
-      stopifnot(isCGALpolygonWithHoles(pwh2))
-      xptr2 <- getXPtr2(pwh2)
-      plgs <- private[[".CGALpolygonWithHoles"]]$boolop_union(xptr2)
+    "union" = function(plg2) {
+      stopifnot(isCGALpolygon(plg2) || isCGALpolygonWithHoles(plg2))
+      if(isCGALpolygon(plg2)) {
+        xptr2 <- getXPtr(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_union2(xptr2)
+      } else {
+        xptr2 <- getXPtr2(plg2)
+        plgs <- private[[".CGALpolygonWithHoles"]]$boolop_union(xptr2)
+      }
       # output
       out <- vector("list", length = length(plgs))
       for(i in seq_along(plgs)) {

@@ -57,6 +57,33 @@ ptg <- cgalPolygon$new(pentagram)
 ptg$getVertices()
 
 ## ------------------------------------------------
+## Method `cgalPolygon$intersection`
+## ------------------------------------------------
+
+library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# intersection
+plgList <- plg1$intersection(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
+
+## ------------------------------------------------
 ## Method `cgalPolygon$isCWO`
 ## ------------------------------------------------
 
@@ -125,6 +152,7 @@ ptg$whereIs(rbind(pt1, pt2))
 \item \href{#method-cgalPolygon-boundingBox}{\code{cgalPolygon$boundingBox()}}
 \item \href{#method-cgalPolygon-convexParts}{\code{cgalPolygon$convexParts()}}
 \item \href{#method-cgalPolygon-getVertices}{\code{cgalPolygon$getVertices()}}
+\item \href{#method-cgalPolygon-intersection}{\code{cgalPolygon$intersection()}}
 \item \href{#method-cgalPolygon-isCWO}{\code{cgalPolygon$isCWO()}}
 \item \href{#method-cgalPolygon-isCCWO}{\code{cgalPolygon$isCCWO()}}
 \item \href{#method-cgalPolygon-isConvex}{\code{cgalPolygon$isConvex()}}
@@ -290,6 +318,57 @@ The vertices in a matrix with two columns.
 \preformatted{library(cgalPolygons)
 ptg <- cgalPolygon$new(pentagram)
 ptg$getVertices()
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-cgalPolygon-intersection"></a>}}
+\if{latex}{\out{\hypertarget{method-cgalPolygon-intersection}{}}}
+\subsection{Method \code{intersection()}}{
+Intersection of the polygon with another polygon.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygon$intersection(plg2)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A list whose each element is either a \code{cgalPolygon} object
+  or a \code{cgalPolygonWithHoles} object.
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{library(cgalPolygons)
+# function creating a circle
+circle <- function(x, y, r) {
+  t <- seq(0, 2, length.out = 100)[-1L]
+  t(c(x, y) + r * rbind(cospi(t), sinpi(t)))
+}
+# take two circles
+plg1 <- cgalPolygon$new(circle(-1, 0, 1.25))
+plg2 <- cgalPolygon$new(circle(1, 0, 1.25))
+# intersection
+plgList <- plg1$intersection(plg2)
+plg <- plgList[[1L]]
+# plot
+opar <- par(mar = c(0, 0, 0, 0))
+plot(
+  NULL, xlim = c(-2.6, 2.6), ylim = c(-1.3, 1.3), asp = 1, 
+  xlab = NA, ylab = NA, axes = FALSE
+)
+plg1$plot(lwd = 2, new = FALSE)
+plg2$plot(lwd = 2, new = FALSE)
+plg$plot(lwd = 3, col = "red", new = FALSE)
+par(opar)
 }
 \if{html}{\out{</div>}}
 

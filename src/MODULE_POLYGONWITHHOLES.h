@@ -72,6 +72,42 @@ public:
     return Union(polygonwh, plg2);
   }
   
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_intersection2(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Intersection(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_subtract2(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Subtract(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_symdiff2(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Symdiff(polygonwh, pwh2);
+  }
+  
+  
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  Rcpp::List boolop_union2(Rcpp::XPtr<Polygon> plg2XPtr) {
+    Polygon plg2 = *(plg2XPtr.get());
+    Polygon2WithHoles pwh2 = polygonToPolygon2WithHoles(plg2);
+    return Union(polygonwh, pwh2);
+  }
+  
     
   // ------------------------------------------------------------------------ //
   // ------------------------------------------------------------------------ //

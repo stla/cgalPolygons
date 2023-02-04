@@ -4,6 +4,10 @@ noMissingValue <- function(x) {
 
 #' @importFrom R6 is.R6
 #' @noRd
+isCGALpolygon <- function(x) {
+  is.R6(x) && inherits(x, "cgalPolygon")
+}
+
 isCGALpolygonWithHoles <- function(x) {
   is.R6(x) && inherits(x, "cgalPolygonWithHoles")
 }

@@ -349,13 +349,14 @@ A named list with two fields: \code{"outer"}, the vertices of
 \subsection{Method \code{intersection()}}{
 Intersection of the polygon with another polygon.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$intersection(pwh2)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$intersection(plg2)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
 }
 \if{html}{\out{</div>}}
 }
@@ -399,13 +400,13 @@ par(opar)
 \subsection{Method \code{minkowskiSum()}}{
 Minkowski sum of the polygon and another polygon.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$minkowskiSum(pwh2, method = "convolution")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$minkowskiSum(plg2, method = "convolution")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object, the polygon to add 
+\item{\code{plg2}}{a \code{cgalPolygonWithHoles} object, the polygon to add 
 to the reference polygon}
 
 \item{\code{method}}{the method used: \code{"convolution"}, \code{"triangle"}, 
@@ -497,13 +498,14 @@ No value, just prints some information about the polygon.
 \subsection{Method \code{subtract()}}{
 Difference between the polygon and another polygon.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$subtract(pwh2)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$subtract(plg2)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
 }
 \if{html}{\out{</div>}}
 }
@@ -547,13 +549,14 @@ par(opar)
 \subsection{Method \code{symdiff()}}{
 Symmetric difference of the polygon and another polygon.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$symdiff(pwh2)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$symdiff(plg2)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
 }
 \if{html}{\out{</div>}}
 }
@@ -597,13 +600,14 @@ par(opar)
 \subsection{Method \code{union()}}{
 Union of the polygon with another polygon.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$union(pwh2)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{cgalPolygonWithHoles$union(plg2)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{pwh2}}{a \code{cgalPolygonWithHoles} object}
+\item{\code{plg2}}{a \code{cgalPolygon} object or a \code{cgalPolygonWithHoles} 
+object}
 }
 \if{html}{\out{</div>}}
 }
